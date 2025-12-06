@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我忘了啦</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+    }
+
+    body {
+        scroll-snap-type: y mandatory;
+    }
+
+    .page {
+        width: 100vw;
+        height: 100vh;
+        scroll-snap-align: start;
+        position: relative;
+    }
+
+    /* 封面 */
+    .cover {
+        background: url("https://picsum.photos/seed/cover/1600/900") center/cover no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        color: white;
+    }
+
+    /* 第二部分 */
+    .gallery-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 6% 0;
+        box-sizing: border-box;
+    }
+
+    .gallery {
+        display: flex;
+        height: 100%;
+        transition: transform .8s ease;
+    }
+
+    /* 每張圖片一個 slide → 保證 100% 寬度，圖片永遠置中 */
+    .slide {
+        width: 100vw;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide img {
+        max-height: 100%;
+        max-width: 90vw;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* 指示器 */
+    .indicators {
+        position: absolute;
+        /* place indicators on the picture area */
+        bottom: 8vh;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 21;
+        pointer-events: auto;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ffffff60;
+        cursor: pointer;
+        transition: transform .2s ease, background .2s ease;
+    }
+
+    .dot.active {
+        background: #ffffff;
+        transform: scale(1.2);
+    }
+
+    /* 左右按鈕 */
+    .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0);
+        color: #2b2b2b;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 20;
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    .nav-button.prev { left: 12px; }
+    .nav-button.next { right: 12px; }
+
+</style>
+</head>
+<body>
+
+<section class="page cover">我的網站封面</section>
+
+<section class="page">
+    <div class="gallery-wrapper">
+
+        <div class="gallery" id="gallery">
+
+            <!-- 你可以自由新增 slide -->
+            <div class="slide"><img src="普通設計_萊茵生命.png"></div>
+            <div class="slide"><img src="普通設計_Mon3tr.png"></div>
+            <div class="slide"><img src="普通設計_萊茵生命.png"></div>
+
+        </div>
+
+        <div class="indicators" id="indicators" aria-hidden="false"></div>
+
+        <button class="nav-button prev" id="prevBtn" aria-label="Previous slide">&#10094;</button>
+        <button class="nav-button next" id="nextBtn" aria-label="Next slide">&#10095;</button>
+    </div>
+</section>
+
+<section class="page contact">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 20px; color: #333;">
+        <h2 style="font-size: 2.5rem; margin: 0;">聯絡我</h2>
+        <div style="font-size: 1.2rem; text-align: center;">
+            <p>Email: <a href="mailto:contact@example.com" style="color: #0066cc; text-decoration: none;">contact@example.com</a></p>
+            <p>Phone: <a href="tel:+1234567890" style="color: #0066cc; text-decoration: none;">+1 (234) 567-890</a></p>
+            <p>Address: 123 Main Street, City, Country</p>
+        </div>
+    </div>
+</section>
+
+<script>
+const gallery = document.getElementById("gallery");
+const indicators = document.getElementById("indicators");
+const galleryWrapper = document.querySelector('.gallery-wrapper');
+let index = 0;
+
+function total() {
+    return gallery.children.length;
+}
+
+function updateGallery() {
+    // keep index in bounds
+    index = Math.max(0, Math.min(index, total() - 1));
+    gallery.style.transform = `translateX(${-index * 100}vw)`;
+    updateDots();
+}
+
+function buildDots() {
+    if (!indicators) return;
+    indicators.innerHTML = "";
+    for (let i = 0; i < total(); i++) {
+        const dot = document.createElement("div");
+        dot.className = "dot";
+        dot.setAttribute('role','button');
+        dot.setAttribute('aria-label', `Slide ${i+1}`);
+        dot.addEventListener('click', () => { index = i; updateGallery(); });
+        indicators.appendChild(dot);
+    }
+}
+
+function updateDots() {
+    if (!indicators) return;
+    [...indicators.children].forEach((dot, i) =>
+        dot.classList.toggle("active", i === index)
+    );
+}
+
+let inGallery = false;
+window.addEventListener("scroll", () => {
+    const vh = window.innerHeight;
+    inGallery = window.scrollY >= vh - 10 && window.scrollY < vh * 2;
+});
+
+/* 滾輪 → 垂直滾動到下一個 section (kept) */
+window.addEventListener("wheel", (e) => {
+    const vh = window.innerHeight;
+    const currentScroll = window.scrollY;
+
+    if (currentScroll < vh && e.deltaY > 0) {
+        e.preventDefault();
+        window.scrollTo({ top: vh, behavior: "smooth" });
+    } else if (currentScroll >= vh && currentScroll < vh * 2 && e.deltaY > 0) {
+        e.preventDefault();
+        window.scrollTo({ top: vh * 2, behavior: "smooth" });
+    } else if (currentScroll >= vh && currentScroll < vh * 2 && e.deltaY < 0) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (currentScroll >= vh * 2 && e.deltaY < 0) {
+        e.preventDefault();
+        window.scrollTo({ top: vh, behavior: "smooth" });
+    }
+}, { passive: false });
+
+/* Autoplay with pause on hover and when page not visible */
+let autoplayTimer = null;
+const AUTOPLAY_DELAY = 3000;
+
+function startAutoplay() {
+    if (autoplayTimer) return;
+    autoplayTimer = setInterval(() => {
+        if (!inGallery || document.hidden) return;
+        index = (index + 1) % total();
+        updateGallery();
+    }, AUTOPLAY_DELAY);
+}
+
+function stopAutoplay() {
+    if (!autoplayTimer) return;
+    clearInterval(autoplayTimer);
+    autoplayTimer = null;
+}
+
+if (galleryWrapper) {
+    galleryWrapper.addEventListener('mouseenter', stopAutoplay);
+    galleryWrapper.addEventListener('mouseleave', () => { startAutoplay(); });
+}
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAutoplay(); else startAutoplay();
+});
+
+// init
+buildDots();
+updateGallery();
+startAutoplay();
+
+window.addEventListener("resize", updateGallery);
+
+// left / right buttons
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+function prevSlide() {
+    if (total() === 0) return;
+    index = (index - 1 + total()) % total();
+    updateGallery();
+}
+
+function nextSlide() {
+    if (total() === 0) return;
+    index = (index + 1) % total();
+    updateGallery();
+}
+
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        stopAutoplay();
+        prevSlide();
+        setTimeout(startAutoplay, AUTOPLAY_DELAY);
+    });
+}
+
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        stopAutoplay();
+        nextSlide();
+        setTimeout(startAutoplay, AUTOPLAY_DELAY);
+    });
+}
+</script>
+
+</body>
+</html>
