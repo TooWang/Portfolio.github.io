@@ -14,6 +14,7 @@
 
     body {
         scroll-snap-type: y mandatory;
+        font-family: 'Noto Sans TC',sans-serif;
     }
 
     .page {
@@ -25,7 +26,7 @@
 
     /* 封面 */
     .cover {
-        background: url("https://picsum.photos/seed/cover/1600/900") center/cover no-repeat;
+        background: url("https://aegirorganizingcommittee-pntdk.wordpress.com/wp-content/uploads/2025/09/main_0_kv-4.png") center/cover no-repeat;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -36,10 +37,11 @@
     /* 第二部分 */
     .gallery-wrapper {
         width: 100%;
-        height: 100%;
+        height: 80%;
         overflow: hidden;
         position: relative;
-        padding: 6% 0;
+        top: 10%;
+        padding: 8% 0;
         box-sizing: border-box;
     }
 
@@ -56,10 +58,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     .slide img {
-        max-height: 100%;
+        max-height: 80vh;
         max-width: 90vw;
         object-fit: contain;
         display: block;
@@ -115,6 +118,47 @@
     .nav-button.prev { left: 12px; }
     .nav-button.next { right: 12px; }
 
+    .description {
+        color: #fff;
+        position: absolute;
+        inset: 0; /* cover the media container (image area) */
+        display: flex;
+        align-items: flex-end; /* place text at bottom */
+        justify-content: center;
+        padding: 4vh 6%;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 1.2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 240ms ease, transform 240ms ease, backdrop-filter 240ms ease;
+        transform: translateY(10px);
+        background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%);
+        backdrop-filter: blur(4px);
+        z-index: 2;
+    }
+
+    .media {
+        position: relative;
+        display: inline-block; /* shrink to image size */
+        line-height: 0; /* remove inline whitespace */
+    }
+
+    .media img {
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* show description as a gradient overlay when hovering the slide or when the slide receives keyboard focus */
+    .slide:hover .description,
+    .slide:focus-within .description,
+    .slide img:hover + .description {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
 </style>
 </head>
 <body>
@@ -127,9 +171,30 @@
         <div class="gallery" id="gallery">
 
             <!-- 你可以自由新增 slide -->
-            <div class="slide"><img src="./image/gallery/普通設計_萊茵生命.png"></div>
-            <div class="slide"><img src="./image/gallery/普通設計_Mon3tr.png"></div>
-            <div class="slide"><img src="./image/gallery/普通設計_萊茵生命.png"></div>
+            <div class="slide">
+                <div class="media">
+                    <img src="https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Mon3tr.png" alt="Mon3tr">
+                    <div class="description">排版練習_Mon3tr</div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="media">
+                    <img src="https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Rhine.png" alt="Rhine">
+                    <div class="description">光影合成練習_萊茵生命</div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="media">
+                    <img src="https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Summary2024.png" alt="Summary2024">
+                    <div class="description">2024年度總結</div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="media">
+                    <img src="https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/SBC4.png" alt="SBC4">
+                    <div class="description">寄術杯#4</div>
+                </div>
+            </div>
 
         </div>
 
@@ -142,14 +207,14 @@
 
 <section class="page contact">
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 20px; color: #333;">
-        <h2 style="font-size: 2.5rem; margin: 0;">聯絡我</h2>
+        <h2 style="font-size: 2.5rem; margin: 0;">關於我</h2>
         <div style="font-size: 1.2rem; text-align: center;">
-            <p>Email: <a href="mailto:contact@example.com" style="color: #0066cc; text-decoration: none;">contact@example.com</a></p>
-            <p>Phone: <a href="tel:+1234567890" style="color: #0066cc; text-decoration: none;">+1 (234) 567-890</a></p>
-            <p>Address: 123 Main Street, City, Country</p>
+            <p>"我忘了啦"</p>
+            <p>Email: <a href="mailto:TooWangAK@gmail.com" style="color: #0066cc; text-decoration: none;">TooWangAK@gmail.com</a></p>
         </div>
     </div>
 </section>
+
 
 <script>
 const gallery = document.getElementById("gallery");
