@@ -1,47 +1,32 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scroll for navigation links
-    const navLinks = document.querySelectorAll('.navbar a');
+    // Optional: Add smooth scroll behavior for mouse wheel
+    let isScrolling = false;
     
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            const navHeight = document.querySelector('.navbar').offsetHeight;
-            
-            window.scrollTo({
-                top: targetSection.offsetTop - navHeight,
-                behavior: 'smooth'
-            });
-        });
-    });
+    // Add page transition effects
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px'
+    };
     
-    // Add active state to navigation
-    window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.navbar a');
-        
-        let current = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
-            if (scrollY >= sectionTop - 100) {
-                current = section.getAttribute('id');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
-        
-        navLinks.forEach(link => {
-            link.style.color = '#333';
-            if (link.getAttribute('href').slice(1) === current) {
-                link.style.color = '#007bff';
-            }
-        });
+    }, observerOptions);
+    
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(section);
     });
     
-    // Optional: Add lightbox functionality for gallery items
+    // Gallery item click functionality
     const galleryItems = document.querySelectorAll('.gallery-item');
     
     galleryItems.forEach(item => {
