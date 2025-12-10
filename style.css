@@ -16,6 +16,18 @@ body {
     overflow-x: hidden;
 }
 
+/* Disable scrollbar on desktop for cleaner look */
+@media (min-width: 769px) {
+    html {
+        overflow: hidden;
+    }
+    
+    body {
+        overflow: hidden;
+        height: 100vh;
+    }
+}
+
 /* Cover Section */
 .cover {
     height: 100vh;
@@ -84,6 +96,8 @@ body {
     height: calc(100vh - 140px); /* Adjust based on title and padding */
     overflow-y: auto;
     padding: 0 1rem 1rem 1rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Custom scrollbar for gallery grids */
@@ -300,77 +314,4 @@ body {
         gap: 1rem;
         height: calc(100vh - 120px);
     }
-}
-/* Add this to your style.css */
-
-/* Disable scrollbar on desktop for cleaner look */
-@media (min-width: 769px) {
-    html {
-        overflow: hidden;
-    }
-    
-    body {
-        overflow: hidden;
-        height: 100vh;
-    }
-}
-
-/* Scroll indicators */
-.scroll-indicators {
-    position: fixed;
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    display: none;
-}
-
-@media (min-width: 769px) {
-    .scroll-indicators {
-        display: block;
-    }
-}
-
-.indicator-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    margin: 15px 0;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.indicator-dot:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.2);
-}
-
-.indicator-dot.active {
-    background: white;
-    transform: scale(1.2);
-}
-
-/* Dark indicators for light sections */
-.gallery-section ~ .scroll-indicators .indicator-dot,
-.artwork-section ~ .scroll-indicators .indicator-dot {
-    background: rgba(0, 0, 0, 0.2);
-    border-color: rgba(0, 0, 0, 0.4);
-}
-
-.gallery-section ~ .scroll-indicators .indicator-dot.active,
-.artwork-section ~ .scroll-indicators .indicator-dot.active {
-    background: #333;
-}
-
-/* Ensure smooth scrolling */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Gallery grid scrolling - keep internal scroll */
-.gallery-grid {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
 }

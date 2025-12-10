@@ -130,46 +130,4 @@ document.addEventListener('DOMContentLoaded', function() {
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(section);
     });
-    
-    // Add visual indicators (optional)
-    const indicatorContainer = document.createElement('div');
-    indicatorContainer.className = 'scroll-indicators';
-    
-    sections.forEach((section, index) => {
-        const dot = document.createElement('div');
-        dot.className = 'indicator-dot';
-        if (index === currentSection) dot.classList.add('active');
-        dot.addEventListener('click', () => scrollToSection(index));
-        indicatorContainer.appendChild(dot);
-    });
-    
-    document.body.appendChild(indicatorContainer);
-    
-    // Update indicators on scroll
-    function updateIndicators() {
-        const dots = document.querySelectorAll('.indicator-dot');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSection);
-        });
-    }
-    
-    // Listen for scroll end to update indicators
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            const windowHeight = window.innerHeight;
-            const scrollPosition = window.scrollY + windowHeight / 2;
-            
-            sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                    currentSection = index;
-                    updateIndicators();
-                }
-            });
-        }, 100);
-    });
 });
