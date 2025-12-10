@@ -1,7 +1,112 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Optional: Add smooth scroll behavior for mouse wheel
+    // Full page scroll functionality for desktop only
+    const sections = document.querySelectorAll('section');
+    let currentSection = 0;
     let isScrolling = false;
+    
+    // Check if device is desktop (screen width > 768px)
+    function isDesktop() {
+        return window.innerWidth > 768;
+    }
+    
+    // Scroll to specific section
+    function scrollToSection(index) {
+        if (index >= 0 && index < sections.length && !isScrolling) {
+            isScrolling = true;
+            sections[index].scrollIntoView({ behavior: 'smooth' });
+            currentSection = index;
+            
+            // Reset scrolling flag after animation
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000);
+        }
+    }
+    
+    // Handle wheel events for desktop
+    function handleWheel(e) {
+        if (!isDesktop()) return;
+        
+        e.preventDefault();
+        
+        // Check if scrolling inside gallery
+        const gallery = e.target.closest('.gallery-grid');
+        if (gallery) {
+            // Check if gallery can scroll
+            const canScrollUp = gallery.scrollTop > 0;
+            const canScrollDown = gallery.scrollTop < gallery.scrollHeight - gallery.clientHeight - 1;
+            
+            if ((e.deltaY < 0 && canScrollUp) || (e.deltaY > 0 && canScrollDown)) {
+                // Let gallery scroll normally
+                gallery.scrollTop += e.deltaY;
+                return;
+            }
+        }
+        
+        // Otherwise, do full page scroll
+        if (!isScrolling) {
+            if (e.deltaY > 0) {
+                // Scroll down
+                scrollToSection(currentSection + 1);
+            } else {
+                // Scroll up
+                scrollToSection(currentSection - 1);
+            }
+        }
+    }
+    
+    // Add wheel event listener with passive: false to allow preventDefault
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    
+    // Handle keyboard navigation
+    window.addEventListener('keydown', function(e) {
+        if (!isDesktop()) return;
+        
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+            e.preventDefault();
+            scrollToSection(currentSection + 1);
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            e.preventDefault();
+            scrollToSection(currentSection - 1);
+        }
+    });
+    
+    // Update current section on window resize
+    window.addEventListener('resize', function() {
+        // Find which section is currently in view
+        const windowHeight = window.innerHeight;
+        const scrollPosition = window.scrollY + windowHeight / 2;
+        
+        sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                currentSection = index;
+            }
+        });
+    });
+    
+    // Set initial section based on scroll position
+    const initialScrollPosition = window.scrollY + window.innerHeight / 2;
+    sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        
+        if (initialScrollPosition >= sectionTop && initialScrollPosition < sectionBottom) {
+            currentSection = index;
+        }
+    });
+    
+    // Gallery item click functionality
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            console.log('Gallery item clicked');
+        });
+    });
     
     // Add page transition effects
     const observerOptions = {
@@ -19,20 +124,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
     
     // Observe all sections
-    document.querySelectorAll('section').forEach(section => {
+    sections.forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(20px)';
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(section);
     });
     
-    // Gallery item click functionality
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    // Add visual indicators (optional)
+    const indicatorContainer = document.createElement('div');
+    indicatorContainer.className = 'scroll-indicators';
     
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // You can add lightbox functionality here
-            console.log('Gallery item clicked');
+    sections.forEach((section, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'indicator-dot';
+        if (index === currentSection) dot.classList.add('active');
+        dot.addEventListener('click', () => scrollToSection(index));
+        indicatorContainer.appendChild(dot);
+    });
+    
+    document.body.appendChild(indicatorContainer);
+    
+    // Update indicators on scroll
+    function updateIndicators() {
+        const dots = document.querySelectorAll('.indicator-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSection);
         });
+    }
+    
+    // Listen for scroll end to update indicators
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const windowHeight = window.innerHeight;
+            const scrollPosition = window.scrollY + windowHeight / 2;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    currentSection = index;
+                    updateIndicators();
+                }
+            });
+        }, 100);
     });
 });
