@@ -624,3 +624,121 @@ body {
         height: calc(100vh - 120px);
     }
 }
+
+/* Contact Section */
+.contact-section {
+    height: 100vh;
+    background: #222;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.contact-section .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.contact-section .section-title {
+    color: white;
+    margin-bottom: 3rem;
+    text-align: center;
+    width: 100%;
+}
+
+.contact-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-text {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* Contact buttons section */
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.contact-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.contact-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Facebook button */
+.facebook-btn:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+}
+
+/* Discord button */
+.discord-btn:hover {
+    background: #5865F2;
+    border-color: #5865F2;
+}
+
+/* Email button */
+.email-btn:hover {
+    background: #ea4335;
+    border-color: #ea4335;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .contact-text {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .contact-button {
+        width: 200px;
+        justify-content: center;
+    }
+}
