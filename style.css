@@ -31,7 +31,7 @@ body {
 /* Cover Section */
 .cover {
     height: 100vh;
-    background: url('https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/年度總結.png') center/cover no-repeat;
+    background: url('https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/BG.png') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
