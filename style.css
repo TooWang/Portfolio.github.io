@@ -75,7 +75,7 @@ body {
 
 /* Gallery Sections */
 .gallery-section {
-    height: 100vh;
+    height: 70vh; /* Changed from 100vh to 70vh */
     background: #f8f9fa;
     overflow: hidden;
     box-sizing: border-box;
@@ -92,8 +92,8 @@ body {
 .gallery-section .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
-    height: 100vh;
+    padding: 1.5rem; /* Reduced padding */
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,7 +104,7 @@ body {
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Reduced margin */
     color: #333;
     width: 100%;
 }
@@ -114,35 +114,39 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
     gap: 1.5rem;
-    max-height: calc(100vh - 140px);
+    max-height: calc(70vh - 100px); /* Adjusted to match new section height */
     overflow-y: auto;
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 1rem;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     align-content: start;
     justify-content: center;
     width: 100%;
-    max-width: 1000px; /* Limit max width for better centering */
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 /* Responsive Design - Mobile */
 @media (max-width: 768px) {
+    .gallery-section {
+        height: 70vh; /* Keep 70vh on mobile too */
+    }
+    
     .gallery-section .container {
-        padding: 1.5rem 1rem;
+        padding: 1rem 0.75rem;
     }
     
     .section-title {
         font-size: 2rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
     
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1rem;
-        max-height: calc(100vh - 120px);
-        padding: 0 0.5rem 0.5rem 0.5rem;
+        max-height: calc(70vh - 80px); /* Adjusted for mobile */
+        padding: 0 0.5rem;
         align-content: start;
         max-width: 100%;
     }
@@ -152,14 +156,15 @@ body {
 @media (min-width: 769px) and (max-height: 800px) {
     .section-title {
         font-size: 2rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
     
     .gallery-grid {
         gap: 1rem;
-        max-height: calc(100vh - 120px);
+        max-height: calc(70vh - 80px); /* Adjusted for small height screens */
     }
 }
+
 
 
 /* Cover Section */
