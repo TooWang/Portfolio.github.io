@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             setTimeout(() => {
                 isScrolling = false;
-            }, 1000);
+            }, 50);
         }
     }
     
