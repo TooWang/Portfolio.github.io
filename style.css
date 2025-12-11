@@ -64,7 +64,7 @@ body {
 
 /* Container */
 .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 2rem;
     height: 100vh;
@@ -75,7 +75,7 @@ body {
 
 /* Gallery Sections */
 .gallery-section {
-    height: 70vh; /* Changed from 100vh to 70vh */
+    height: 90vh; /* Changed from 100vh to 70vh */
     background: #f8f9fa;
     overflow: hidden;
     box-sizing: border-box;
@@ -90,7 +90,7 @@ body {
 
 /* Update container for gallery sections */
 .gallery-section .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 1.5rem; /* Reduced padding */
     height: auto;
@@ -114,7 +114,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
     gap: 1.5rem;
-    max-height: calc(70vh - 100px); /* Adjusted to match new section height */
+    max-height: calc(90vh - 100px); /* Adjusted to match new section height */
     overflow-y: auto;
     padding: 0 1rem;
     scroll-behavior: smooth;
@@ -122,7 +122,7 @@ body {
     align-content: start;
     justify-content: center;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1500px;
     margin: 0 auto;
 }
 
@@ -225,7 +225,7 @@ body {
 
 /* Update container for gallery sections */
 .gallery-section .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 2rem;
     height: auto; /* Changed from 100vh to auto */
@@ -249,7 +249,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
     gap: 1.5rem;
-    max-height: calc(80vh - 100px); /* Reduced from 100vh to 80vh for better centering */
+    max-height: calc(90vh - 100px); /* Reduced from 100vh to 80vh for better centering */
     overflow-y: auto;
     padding: 0 1rem;
     scroll-behavior: smooth;
@@ -257,7 +257,7 @@ body {
     align-content: start;
     justify-content: center;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1500px;
     margin: 0 auto;
 }
 
