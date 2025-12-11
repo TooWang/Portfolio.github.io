@@ -718,19 +718,12 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: zoomIn 0.3s ease;
     object-fit: contain;
+    transition: opacity 0.3s ease;
 }
 
-@keyframes zoomIn {
-    from {
-        transform: translate(-50%, -50%) scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
+.lightbox-content.loading {
+    opacity: 0;
 }
 
 .close-lightbox {
@@ -747,21 +740,6 @@ body {
 
 .close-lightbox:hover {
     color: #ccc;
-}
-
-.lightbox-caption {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 4px;
-    max-width: 80%;
 }
 
 /* Navigation arrows */
@@ -814,12 +792,8 @@ body {
         font-size: 20px;
         padding: 10px;
     }
-    
-    .lightbox-caption {
-        font-size: 0.9rem;
-        bottom: 20px;
-    }
 }
+
 
 /* Ensure gallery items are still clickable */
 .gallery-item {
