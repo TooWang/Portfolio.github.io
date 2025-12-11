@@ -171,7 +171,9 @@ document.addEventListener('DOMContentLoaded', function() {
         lightbox.style.display = 'block';
         lightboxImg.src = imageData.src;
         lightboxImg.alt = imageData.alt;
-        lightboxCaption.innerHTML = `<strong>${imageData.title}</strong><br>${imageData.description}`;
+        
+        // Remove or hide the caption
+        lightboxCaption.style.display = 'none';
         
         // Hide navigation if only one image
         if (allGalleryImages.length <= 1) {
