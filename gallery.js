@@ -11,6 +11,7 @@ function initGallerySection() {
     
     let allGalleryImages = [];
     let currentImageIndex = 0;
+    let currentSectionEl = null;
 
     function shuffle(array) {
         const arr = [...array];
@@ -80,7 +81,6 @@ function initGallerySection() {
             const artwork = pickRandom(all.filter(x => x.section === 'artwork'), 6);
             renderSection('design', design);
             renderSection('artwork', artwork);
-            initializeGalleryImages();
             attachGalleryClickEvents();
         } catch (error) {
             console.error('Failed to load picture data, using fallback set:', error);
@@ -88,17 +88,16 @@ function initGallerySection() {
             const artwork = pickRandom(fallbackData.filter(x => x.section === 'artwork'), 6);
             renderSection('design', design);
             renderSection('artwork', artwork);
-            initializeGalleryImages();
             attachGalleryClickEvents();
         }
     }
     
-    // Initialize gallery images array
-    function initializeGalleryImages() {
-        const galleryItems = document.querySelectorAll('.gallery-item');
+    // Initialize gallery images array for a specific section
+    function initializeGalleryImages(sectionEl) {
+        const galleryItems = sectionEl ? sectionEl.querySelectorAll('.gallery-item') : [];
         allGalleryImages = [];
         
-        galleryItems.forEach((item, index) => {
+        galleryItems.forEach((item) => {
             const img = item.querySelector('img');
             const title = item.querySelector('.overlay h3')?.textContent || '';
             
@@ -230,14 +229,17 @@ function initGallerySection() {
     function attachGalleryClickEvents() {
         const galleryItems = document.querySelectorAll('.gallery-item');
         
-        galleryItems.forEach((item, index) => {
+        galleryItems.forEach((item) => {
             item.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                initializeGalleryImages();
+                const sectionEl = item.closest('section');
+                if (!sectionEl) return;
+                currentSectionEl = sectionEl;
+                initializeGalleryImages(sectionEl);
                 const clickedIndex = allGalleryImages.findIndex(img => img.element === item);
-                openLightbox(clickedIndex !== -1 ? clickedIndex : index);
+                openLightbox(clickedIndex !== -1 ? clickedIndex : 0);
             });
         });
     }
