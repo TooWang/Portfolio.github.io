@@ -74,11 +74,21 @@ function initGallerySection() {
 
     async function loadGalleries() {
         try {
-            const response = await fetch('./picture-data.json', { cache: 'no-cache' });
-            if (!response.ok) throw new Error('Failed to fetch picture data');
-            const all = await response.json();
-            const design = pickRandom(all.filter(x => x.section === 'design'), 6);
-            const artwork = pickRandom(all.filter(x => x.section === 'artwork'), 6);
+            let design, artwork;
+            
+            // Check if preloader already selected images
+            if (window.preloadedGalleryData) {
+                design = window.preloadedGalleryData.design;
+                artwork = window.preloadedGalleryData.artwork;
+            } else {
+                // Fallback: load and select images ourselves
+                const response = await fetch('./picture-data.json', { cache: 'no-cache' });
+                if (!response.ok) throw new Error('Failed to fetch picture data');
+                const all = await response.json();
+                design = pickRandom(all.filter(x => x.section === 'design'), 6);
+                artwork = pickRandom(all.filter(x => x.section === 'artwork'), 6);
+            }
+            
             renderSection('design', design);
             renderSection('artwork', artwork);
             attachGalleryClickEvents();

@@ -103,6 +103,9 @@ class ProgressPreloader {
             const artwork = shuffle(all.filter(x => x.section === 'artwork')).slice(0, 6);
             const allImages = [...design, ...artwork];
             
+            // Store selected images for gallery.js to use
+            window.preloadedGalleryData = { design, artwork };
+            
             this.totalGalleryImages = allImages.length;
             this.loadedGalleryImages = 0;
             
