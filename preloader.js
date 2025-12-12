@@ -136,7 +136,7 @@ class ProgressPreloader {
             // Wait for all images to load
             await Promise.all(imagePromises);
             this.galleryImagesLoaded = true;
-            this.targetProgress = Math.max(this.targetProgress, 90);
+            this.targetProgress = Math.max(this.targetProgress, 80);
             
         } catch (error) {
             console.warn('Failed to preload gallery images:', error);
