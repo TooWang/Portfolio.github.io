@@ -55,9 +55,11 @@ body {
     background: url('https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/BG.png') center/cover no-repeat;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    flex-direction: column;
     position: relative;
     z-index: 1;
+    padding-bottom: 20vh;
 }
 
 .cover::before {
@@ -91,6 +93,20 @@ body {
     z-index: 1;
     font-weight: 300;
     letter-spacing: 2px;
+    display: block;
+    margin: 0 auto;
+    align-self: center;
+}
+
+.cover-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-top: 0.75rem;
 }
 
 @keyframes bounce {
