@@ -11,13 +11,4 @@ document.addEventListener('DOMContentLoaded', function() {
     initFiltering(masonryGrid);
     initLightbox();
     initInfiniteScroll();
-    
-    // Handle window resize
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            createSimpleLayout(masonryGrid, currentFilter);
-        }, 300);
-    });
 });

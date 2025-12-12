@@ -6,6 +6,8 @@
 let isLoading = false;
 
 function generateMoreImages(count) {
+    const masonryGrid = document.querySelector('.masonry-grid');
+    
     for (let i = 0; i < count; i++) {
         const aspectRatio = 1.3 + Math.random() * 0.7;
         const width = Math.floor(300 * aspectRatio);
@@ -17,10 +19,13 @@ function generateMoreImages(count) {
             aspectRatio: aspectRatio
         };
         imageData.push(newImage);
+        
+        // 只追加新圖片，不重新渲染整個佈局
+        if (currentFilter === 'all' || newImage.category === currentFilter) {
+            const element = createImageElement(newImage);
+            masonryGrid.appendChild(element);
+        }
     }
-    
-    const masonryGrid = document.querySelector('.masonry-grid');
-    createSimpleLayout(masonryGrid, currentFilter);
 }
 
 function initInfiniteScroll() {

@@ -5,9 +5,8 @@
 
 /* Tablet (1200px) */
 @media (max-width: 1200px) {
-    .masonry-item,
-    .gallery-row {
-        height: 200px;
+    .masonry-grid {
+        column-count: 3;
     }
 }
 
@@ -26,13 +25,13 @@
         padding: 0 10px;
     }
     
-    .masonry-item,
-    .gallery-row {
-        height: 150px;
+    .masonry-grid {
+        column-count: 2;
+        column-gap: 10px;
     }
     
     .masonry-item {
-        margin: 0 3px;
+        margin-bottom: 10px;
         border-radius: 6px;
     }
     
@@ -62,17 +61,13 @@
         font-size: 1.3rem;
     }
     
-    .masonry-item,
-    .gallery-row {
-        height: 120px;
-    }
-    
     .masonry-grid {
-        gap: 5px;
+        column-count: 1;
+        column-gap: 0;
     }
     
     .masonry-item {
-        margin: 0 2px;
+        margin-bottom: 8px;
         border-radius: 4px;
     }
     

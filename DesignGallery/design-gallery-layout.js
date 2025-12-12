@@ -8,13 +8,6 @@ function createImageElement(data) {
     item.className = 'masonry-item';
     item.setAttribute('data-category', data.category);
     
-    if (data.aspectRatio) {
-        const height = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--row-height') || '250');
-        const width = height * data.aspectRatio;
-        item.style.width = `${width}px`;
-        item.style.flexGrow = data.aspectRatio;
-    }
-    
     item.innerHTML = `
         <img src="${data.src}" alt="${data.title}" loading="lazy">
         <div class="item-overlay">

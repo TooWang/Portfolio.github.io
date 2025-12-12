@@ -4,30 +4,29 @@
    ============================================ */
 
 .masonry-container {
-    margin: 80px auto 40px;
+    margin: 100px auto 40px;
     padding: 0 20px;
     max-width: 1600px;
 }
 
 .masonry-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
+    column-count: 4;
+    column-gap: 15px;
 }
 
 .gallery-row {
     display: flex;
     width: 100%;
     margin-bottom: 10px;
-    height: 250px;
+    align-items: flex-start;
 }
+
+/* Not used in new layout, kept for compatibility */
 
 /* Gallery Items */
 .masonry-item {
-    height: 250px;
-    flex-grow: 1;
-    margin: 0 5px;
+    break-inside: avoid;
+    margin-bottom: 15px;
     position: relative;
     overflow: hidden;
     border-radius: 8px;
@@ -37,6 +36,8 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.5s ease forwards;
     opacity: 0;
+    display: inline-block;
+    width: 100%;
 }
 
 .masonry-item:first-child {
@@ -54,11 +55,10 @@
 }
 
 .masonry-item img {
-    height: 100%;
     width: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     display: block;
-    background-color: #f0f0f0;
     transition: transform 0.3s ease;
 }
 
@@ -103,4 +103,10 @@
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
+}
+
+@media screen and (max-width: 768px) {
+    .masonry-container {
+        margin: 160px auto 40px;
+    }
 }
