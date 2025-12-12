@@ -111,29 +111,33 @@ class ProgressPreloader {
             this.totalGalleryImages = allImages.length;
             this.loadedGalleryImages = 0;
             
+            if (this.totalGalleryImages === 0) {
+                this.galleryImagesLoaded = true;
+                return;
+            }
+            
             // Preload all images using Promise.all for reliability
-            const imagePromises = allImages.map(data => {
+            const imagePromises = allImages.map((data) => {
                 return new Promise((resolve) => {
                     const img = new Image();
                     
-                    img.onload = () => {
+                    const onLoadComplete = () => {
                         this.loadedGalleryImages++;
-                        const loadPercent = (this.loadedGalleryImages / this.totalGalleryImages) * 100;
-                        const progress = 10 + loadPercent * 0.8; // 10% to 90%
+                        // Progress from 10% to 90% based on loaded images
+                        const progress = 10 + (this.loadedGalleryImages / this.totalGalleryImages) * 80;
                         this.currentProgress = progress;
                         this.targetProgress = progress;
                         this.updateProgressBar();
+                    };
+                    
+                    img.onload = () => {
+                        onLoadComplete();
                         resolve();
                     };
                     
                     img.onerror = () => {
-                        this.loadedGalleryImages++;
-                        const loadPercent = (this.loadedGalleryImages / this.totalGalleryImages) * 100;
-                        const progress = 10 + loadPercent * 0.8; // 10% to 90%
-                        this.currentProgress = progress;
-                        this.targetProgress = progress;
-                        this.updateProgressBar();
                         console.warn('Failed to load image:', data.src);
+                        onLoadComplete();
                         resolve();
                     };
                     
@@ -144,9 +148,6 @@ class ProgressPreloader {
             // Wait for all images to load
             await Promise.all(imagePromises);
             this.galleryImagesLoaded = true;
-            this.currentProgress = 90;
-            this.targetProgress = 90;
-            this.updateProgressBar();
             
         } catch (error) {
             console.warn('Failed to preload gallery images:', error);
@@ -155,31 +156,26 @@ class ProgressPreloader {
     }
     
     simulateProgress() {
-        // Update progress bar directly without animation delay
-        const progressInterval = setInterval(() => {
-            if (this.isComplete) {
-                clearInterval(progressInterval);
-                return;
-            }
-            
-            // Directly set current to target for instant update
-            this.currentProgress = this.targetProgress;
-            this.updateProgressBar();
-        }, 50);
+        // No simulation needed - progress is controlled by actual loading events
     }
     
     onPageReady() {
-        // Page is ready
-        const waitForComplete = setInterval(() => {
-            // Wait for page ready, cover background AND all gallery images loaded
+        // Check completion status
+        const checkCompletion = setInterval(() => {
+            if (this.isComplete) {
+                clearInterval(checkCompletion);
+                return;
+            }
+            
+            // All assets loaded, move to 95%
             if (this.coverBgLoaded && this.galleryImagesLoaded) {
-                clearInterval(waitForComplete);
+                clearInterval(checkCompletion);
                 this.currentProgress = 95;
                 this.targetProgress = 95;
                 this.updateProgressBar();
                 this.completeLoading();
             }
-        }, 50);
+        }, 100);
     }
     
     setProgress(value) {
