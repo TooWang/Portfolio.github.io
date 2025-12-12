@@ -20,6 +20,37 @@ class ProgressPreloader {
         
         this.init();
     }
+
+    resolveDataUrl() {
+        const { origin, pathname } = window.location;
+        const lastSegment = pathname.split('/').pop() || '';
+        const hasFileName = /\.[a-zA-Z0-9]+$/.test(lastSegment);
+        const basePath = pathname.endsWith('/')
+            ? pathname
+            : hasFileName
+                ? pathname.replace(/[^/]+$/, '')
+                : `${pathname}/`;
+        const primary = new URL('picture-data.json', origin + basePath).href;
+        const fallback = new URL('/picture-data.json', origin).href;
+        return { primary, fallback };
+    }
+
+    async fetchPictureData() {
+        if (Array.isArray(window.pictureData)) {
+            return window.pictureData;
+        }
+        const { primary, fallback } = this.resolveDataUrl();
+        try {
+            const res = await fetch(primary, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`primary fetch failed: ${res.status}`);
+            return await res.json();
+        } catch (primaryErr) {
+            console.warn('Primary picture-data.json fetch failed, retrying with root path', primaryErr);
+            const res = await fetch(fallback, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`fallback fetch failed: ${res.status}`);
+            return await res.json();
+        }
+    }
     
     init() {
         // Create progress bar HTML
@@ -87,9 +118,7 @@ class ProgressPreloader {
     
     async loadGalleryImages() {
         try {
-            const response = await fetch('./picture-data.json', { cache: 'no-cache' });
-            if (!response.ok) throw new Error('Failed to fetch');
-            const all = await response.json();
+            const all = await this.fetchPictureData();
             
             // Pick 6 random from each section (same logic as gallery.js)
             const shuffle = arr => {

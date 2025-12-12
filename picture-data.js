@@ -1,4 +1,4 @@
-[
+window.pictureData = [
   {
     "id": "design-1",
     "section": "design",
@@ -116,4 +116,4 @@
     "src": "https://via.placeholder.com/400x300",
     "aspectRatio": 1.33
   }
-]
+];

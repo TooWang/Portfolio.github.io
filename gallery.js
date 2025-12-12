@@ -48,29 +48,43 @@ function initGallerySection() {
         return item;
     }
 
+    function resolveDataUrl() {
+        const { origin, pathname } = window.location;
+        const lastSegment = pathname.split('/').pop() || '';
+        const hasFileName = /\.[a-zA-Z0-9]+$/.test(lastSegment);
+        const basePath = pathname.endsWith('/')
+            ? pathname
+            : hasFileName
+                ? pathname.replace(/[^/]+$/, '')
+                : `${pathname}/`;
+        const primary = new URL('picture-data.json', origin + basePath).href;
+        const fallback = new URL('/picture-data.json', origin).href;
+        return { primary, fallback };
+    }
+
+    async function fetchPictureData() {
+        if (Array.isArray(window.pictureData)) {
+            return window.pictureData;
+        }
+        const { primary, fallback } = resolveDataUrl();
+        try {
+            const res = await fetch(primary, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`primary fetch failed: ${res.status}`);
+            return await res.json();
+        } catch (primaryErr) {
+            console.warn('Primary picture-data.json fetch failed, retrying with root path', primaryErr);
+            const res = await fetch(fallback, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`fallback fetch failed: ${res.status}`);
+            return await res.json();
+        }
+    }
+
     function renderSection(sectionId, items) {
         const grid = document.querySelector(`#${sectionId} .gallery-grid`);
         if (!grid) return;
         grid.innerHTML = '';
         items.forEach(data => grid.appendChild(buildGalleryItem(data)));
     }
-
-    const fallbackData = [
-        { id: 'design-1', section: 'design', title: 'Mon3tr CG二創', subtitle: '排版練習', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Mon3tr.png', aspectRatio: 1.33 },
-        { id: 'design-2', section: 'design', title: '萊茵生命', subtitle: '光影合成練習', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Rhine.png', aspectRatio: 1.33 },
-        { id: 'design-3', section: 'design', title: '2024年度總結', subtitle: '2024個人年度總結', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Summary2024.png', aspectRatio: 1.78, objectPosition: '50% 60%' },
-        { id: 'design-4', section: 'design', title: '寄術杯#4', subtitle: '明日方舟繁中服非官方肉鴿比賽"寄術杯"美術包裝', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/SBC4.png', aspectRatio: 1.33 },
-        { id: 'design-5', section: 'design', title: '終末地"全面測試"直播封面', subtitle: '', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/endfield_Cover.png', aspectRatio: 1.33 },
-        { id: 'design-6', section: 'design', title: '幹員文本自動化工具', subtitle: '泰拉旅社語音解包工作流', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/VoiceToTextTool.png', aspectRatio: 1.33 },
-        { id: 'design-7', section: 'design', title: '終始機制解析', subtitle: '啊?戈爾舟遊籌措會 薩米系列攻略影片封面', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami.png', aspectRatio: 1.33 },
-        { id: 'design-8', section: 'design', title: '虛無之偶攻略', subtitle: '啊?戈爾舟遊籌措會 薩米系列攻略影片封面', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami2.png', aspectRatio: 1.33 },
-        { id: 'art-1', section: 'artwork', title: 'Artwork Title 1', subtitle: 'Medium: Digital Art', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat1.png', aspectRatio: 1.33, objectPosition: '50% 10%' },
-        { id: 'art-2', section: 'artwork', title: 'Artwork Title 2', subtitle: 'Medium: Oil Painting', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat2.png', aspectRatio: 1.33, objectPosition: '50% 10%' },
-        { id: 'art-3', section: 'artwork', title: 'Artwork Title 3', subtitle: 'Medium: Watercolor', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat3.png', aspectRatio: 1.33, objectPosition: '50% 20%' },
-        { id: 'art-4', section: 'artwork', title: 'Artwork Title 4', subtitle: 'Medium: Mixed Media', src: 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat4.png', aspectRatio: 1.33, objectPosition: '50% 10%' },
-        { id: 'art-5', section: 'artwork', title: 'Artwork Title 5', subtitle: 'Medium: Pencil Sketch', src: 'https://via.placeholder.com/400x300', aspectRatio: 1.33 },
-        { id: 'art-6', section: 'artwork', title: 'Artwork Title 6', subtitle: 'Medium: Digital Illustration', src: 'https://via.placeholder.com/400x300', aspectRatio: 1.33 }
-    ];
 
     async function loadGalleries() {
         try {
@@ -82,9 +96,7 @@ function initGallerySection() {
                 artwork = window.preloadedGalleryData.artwork;
             } else {
                 // Fallback: load and select images ourselves
-                const response = await fetch('./picture-data.json', { cache: 'no-cache' });
-                if (!response.ok) throw new Error('Failed to fetch picture data');
-                const all = await response.json();
+                const all = await fetchPictureData();
                 design = pickRandom(all.filter(x => x.section === 'design'), 6);
                 artwork = pickRandom(all.filter(x => x.section === 'artwork'), 6);
             }
@@ -93,13 +105,18 @@ function initGallerySection() {
             renderSection('artwork', artwork);
             attachGalleryClickEvents();
         } catch (error) {
-            console.error('Failed to load picture data, using fallback set:', error);
-            const design = pickRandom(fallbackData.filter(x => x.section === 'design'), 6);
-            const artwork = pickRandom(fallbackData.filter(x => x.section === 'artwork'), 6);
-            renderSection('design', design);
-            renderSection('artwork', artwork);
-            attachGalleryClickEvents();
+            console.error('Failed to load picture data:', error);
+            showLoadError();
         }
+    }
+
+    function showLoadError() {
+        ['design', 'artwork'].forEach((sectionId) => {
+            const grid = document.querySelector(`#${sectionId} .gallery-grid`);
+            if (grid) {
+                grid.innerHTML = '<div class="gallery-error">無法載入圖片資料</div>';
+            }
+        });
     }
     
     // Initialize gallery images array for a specific section

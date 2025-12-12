@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
        UTILITY - Responsive Scroll Tracking
        ============================================ */
     
-    // Update current section on window resize
     window.addEventListener('resize', function() {
         const windowHeight = window.innerHeight;
         const scrollPosition = window.scrollY + windowHeight / 2;
