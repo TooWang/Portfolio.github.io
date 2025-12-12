@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我忘了啦</title>
+    
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="preloader.css">
 </head>
+
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="loader-circle"></div>
+            <p class="loader-text">Loading...</p>
+        </div>
+    </div>
+
     <!-- Cover Section -->
     <section id="home" class="cover">
         <h1 class="cover-title">我忘了啦</h1>
@@ -151,8 +162,6 @@
         </div>
     </section>
 
-    <script src="script.js"></script>
-
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
         <span class="close-lightbox">&times;</span>
@@ -161,6 +170,7 @@
         <span class="lightbox-next">&#10095;</span>
     </div>
 
-
+    <script src="preloader.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
