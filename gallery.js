@@ -1,82 +1,8 @@
 /* ============================================
-   SCRIPT.JS - Portfolio Website
-   ============================================
-   Organized sections: Cover, Gallery, Contact
+   GALLERY.JS - Gallery & Lightbox Functionality
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    /* ============================================
-       COVER SECTION - Full Page Scroll
-       ============================================ */
-    
-    const sections = document.querySelectorAll('section');
-    let currentSection = 0;
-    let isScrolling = false;
-    
-    function isDesktop() {
-        return window.innerWidth > 768;
-    }
-    
-    function scrollToSection(index) {
-        if (index >= 0 && index < sections.length && !isScrolling) {
-            isScrolling = true;
-            sections[index].scrollIntoView({ behavior: 'smooth' });
-            currentSection = index;
-            
-            setTimeout(() => {
-                isScrolling = false;
-            }, 50);
-        }
-    }
-    
-    function handleWheel(e) {
-        if (!isDesktop()) return;
-        
-        e.preventDefault();
-        
-        const gallery = e.target.closest('.gallery-grid');
-        if (gallery) {
-            const canScrollUp = gallery.scrollTop > 0;
-            const canScrollDown = gallery.scrollTop < gallery.scrollHeight - gallery.clientHeight - 1;
-            
-            if ((e.deltaY < 0 && canScrollUp) || (e.deltaY > 0 && canScrollDown)) {
-                gallery.scrollTop += e.deltaY;
-                return;
-            }
-        }
-        
-        if (!isScrolling) {
-            if (e.deltaY > 0) {
-                scrollToSection(currentSection + 1);
-            } else {
-                scrollToSection(currentSection - 1);
-            }
-        }
-    }
-    
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    
-    // Keyboard navigation for page scrolling
-    window.addEventListener('keydown', function(e) {
-        if (!isDesktop()) return;
-        
-        // Only handle page navigation if lightbox is not open
-        if (document.getElementById('lightbox').style.display === 'block') return;
-        
-        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-            e.preventDefault();
-            scrollToSection(currentSection + 1);
-        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-            e.preventDefault();
-            scrollToSection(currentSection - 1);
-        }
-    });
-    
-    /* ============================================
-       GALLERY SECTION - Lightbox
-       ============================================ */
-    
+function initGallerySection() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.querySelector('.close-lightbox');
@@ -262,47 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    /* ============================================
-       CONTACT SECTION - Intersection Observer
-       ============================================ */
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(section);
-    });
-    
-    /* ============================================
-       UTILITY - Responsive Scroll Tracking
-       ============================================ */
-    
-    // Update current section on window resize
-    window.addEventListener('resize', function() {
-        const windowHeight = window.innerHeight;
-        const scrollPosition = window.scrollY + windowHeight / 2;
-        
-        sections.forEach((section, index) => {
-            const sectionTop = section.offsetTop;
-            const sectionBottom = sectionTop + section.offsetHeight;
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                currentSection = index;
-            }
-        });
-    });
-});
+    return { openLightbox, closeLightbox, initializeGalleryImages };
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initGallerySection);

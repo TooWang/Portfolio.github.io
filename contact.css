@@ -1,0 +1,126 @@
+/* ============================================
+   CONTACT.CSS - Contact Section Styles
+   ============================================ */
+
+.contact-section {
+    height: 100vh;
+    background: #222;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.contact-section .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.contact-section .section-title {
+    color: white;
+    margin-bottom: 3rem;
+    text-align: center;
+    width: 100%;
+}
+
+.contact-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-text {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+    margin-top: -1rem;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Contact buttons section */
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.contact-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.contact-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.contact-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Contact button variants */
+.facebook-btn:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+}
+
+.discord-btn:hover {
+    background: #5865F2;
+    border-color: #5865F2;
+}
+
+.email-btn:hover {
+    background: #ea4335;
+    border-color: #ea4335;
+}
+
+/* Contact Section - Mobile */
+@media (max-width: 768px) {
+    .contact-text {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        padding: 0.1rem;
+        line-height: 1.5;
+    }
+    
+    .contact-text:nth-child(2) {
+        font-size: 0.85rem;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .contact-button {
+        width: 200px;
+        justify-content: center;
+    }
+}
