@@ -109,26 +109,35 @@ class ProgressPreloader {
             this.totalGalleryImages = allImages.length;
             this.loadedGalleryImages = 0;
             
-            // Preload all images
-            allImages.forEach(data => {
-                const img = new Image();
-                img.onload = () => {
-                    this.loadedGalleryImages++;
-                    const loadPercent = (this.loadedGalleryImages / this.totalGalleryImages) * 100;
-                    this.targetProgress = Math.max(this.targetProgress, 30 + loadPercent * 0.5); // 30-80%
+            // Preload all images using Promise.all for reliability
+            const imagePromises = allImages.map(data => {
+                return new Promise((resolve) => {
+                    const img = new Image();
                     
-                    if (this.loadedGalleryImages >= this.totalGalleryImages) {
-                        this.galleryImagesLoaded = true;
-                    }
-                };
-                img.onerror = () => {
-                    this.loadedGalleryImages++;
-                    if (this.loadedGalleryImages >= this.totalGalleryImages) {
-                        this.galleryImagesLoaded = true;
-                    }
-                };
-                img.src = data.src;
+                    img.onload = () => {
+                        this.loadedGalleryImages++;
+                        const loadPercent = (this.loadedGalleryImages / this.totalGalleryImages) * 100;
+                        this.targetProgress = Math.max(this.targetProgress, 30 + loadPercent * 0.5); // 30-80%
+                        resolve();
+                    };
+                    
+                    img.onerror = () => {
+                        this.loadedGalleryImages++;
+                        const loadPercent = (this.loadedGalleryImages / this.totalGalleryImages) * 100;
+                        this.targetProgress = Math.max(this.targetProgress, 30 + loadPercent * 0.5);
+                        console.warn('Failed to load image:', data.src);
+                        resolve(); // Resolve anyway to continue
+                    };
+                    
+                    img.src = data.src;
+                });
             });
+            
+            // Wait for all images to load
+            await Promise.all(imagePromises);
+            this.galleryImagesLoaded = true;
+            this.targetProgress = Math.max(this.targetProgress, 90);
+            
         } catch (error) {
             console.warn('Failed to preload gallery images:', error);
             this.galleryImagesLoaded = true; // Continue anyway
