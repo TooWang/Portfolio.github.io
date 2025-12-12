@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Style Gallery</title>
+    <link rel="stylesheet" href="design-gallery.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="site-title">我的圖片收藏</h1>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="design">設計</button>
+            <button class="filter-btn" data-filter="artwork">藝術</button>
+            <button class="filter-btn" data-filter="photo">攝影</button>
+        </div>
+    </header>
+
+    <!-- Masonry Grid Container -->
+    <div class="masonry-container">
+        <div class="masonry-grid">
+            <!-- Images will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Image Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-info">
+            <h3 id="lightbox-title"></h3>
+            <p id="lightbox-description"></p>
+        </div>
+    </div>
+
+    <script src="design-gallery.js"></script>
+</body>
+</html>
