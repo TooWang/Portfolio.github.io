@@ -100,6 +100,11 @@
     border-color: #ea4335;
 }
 
+.qq-btn:hover {
+    background: #12b7f5;
+    border-color: #12b7f5;
+}
+
 /* Contact Section - Mobile */
 @media (max-width: 768px) {
     .contact-text {

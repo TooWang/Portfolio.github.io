@@ -59,7 +59,7 @@ body {
     flex-direction: column;
     position: relative;
     z-index: 1;
-    padding-bottom: 20vh;
+    padding-bottom: 15vh;
 }
 
 .cover::before {
