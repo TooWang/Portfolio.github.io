@@ -6,23 +6,23 @@ window.pictureData = [
   //                               //
   ///////////////////////////////////
   {
-    "id": "design-1",
+    "id": "Design_Mon3tr",
     "section": "design",
     "title": "Mon3tr CG二創",
     "subtitle": "排版練習",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Mon3tr.png",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Design_Mon3tr.png",
     "aspectRatio": 1.33
   },
   {
-    "id": "design-2",
+    "id": "Design_Rhine",
     "section": "design",
     "title": "萊茵生命",
     "subtitle": "光影合成練習",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Rhine.png",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Design_Rhine.png",
     "aspectRatio": 1.33
   },
   {
-    "id": "design-3",
+    "id": "Summary2024",
     "section": "design",
     "title": "2024年度總結",
     "subtitle": "2024個人年度總結",
@@ -31,7 +31,7 @@ window.pictureData = [
     "objectPosition": "50% 60%"
   },
   {
-    "id": "design-4",
+    "id": "SBC4",
     "section": "design",
     "title": "寄術杯#4",
     "subtitle": "明日方舟繁中服非官方肉鴿比賽\"寄術杯\"美術包裝",
@@ -39,15 +39,39 @@ window.pictureData = [
     "aspectRatio": 1.33
   },
   {
-    "id": "design-5",
+    "id": "Cover_EdfieldStream",
     "section": "design",
     "title": "終末地\"全面測試\"直播封面",
     "subtitle": "",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/endfield_Cover.png",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_EdfieldStream.png",
     "aspectRatio": 1.33
   },
   {
-    "id": "design-6",
+    "id": "Cover_Endfield",
+    "section": "design",
+    "title": "終末地\"全面測試\"直播封面",
+    "subtitle": "",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_Endfield.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "Cover_Endfield2",
+    "section": "design",
+    "title": "終末地\"全面測試\"直播封面",
+    "subtitle": "",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_Endfield2.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "Cover_EndfieldGameplay",
+    "section": "design",
+    "title": "終末地\"再次測試\"玩法解析影片封面",
+    "subtitle": "",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_EndfieldGameplay.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "VoiceToTextTool",
     "section": "design",
     "title": "幹員文本自動化工具",
     "subtitle": "泰拉旅社語音解包工作流",
@@ -55,21 +79,62 @@ window.pictureData = [
     "aspectRatio": 1.33
   },
   {
-    "id": "design-7",
+    "id": "Sami1",
     "section": "design",
     "title": "終始機制解析",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami.png",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami1.png",
     "aspectRatio": 1.33
   },
   {
-    "id": "design-8",
+    "id": "Sami2",
     "section": "design",
     "title": "虛無之偶攻略",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
     "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami2.png",
     "aspectRatio": 1.33
   },
+  {
+    "id": "Sami3",
+    "section": "design",
+    "title": "內容拓展更新",
+    "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami3.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "Sami4",
+    "section": "design",
+    "title": "哨兵攻略",
+    "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami4.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "Sami5",
+    "section": "design",
+    "title": "深寒造像攻略",
+    "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami5.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "Sami6",
+    "section": "design",
+    "title": "終始打法攻略",
+    "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami6.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "AegirNetwork",
+    "section": "design",
+    "title": "戈爾舟遊籌措會 成員情報網",
+    "subtitle": "啊?戈爾舟遊籌措會二周年 成員關係網路統計",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/AegirNetwork.png",
+    "aspectRatio": 1.33
+  },
+
 
 
 
