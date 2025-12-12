@@ -13,6 +13,7 @@ class ProgressPreloader {
         this.isComplete = false;
         this.minLoadTime = 1500; // Minimum 1.5 seconds for preloader to show
         this.startTime = Date.now();
+        this.coverBgLoaded = false;
         
         this.init();
     }
@@ -20,6 +21,9 @@ class ProgressPreloader {
     init() {
         // Create progress bar HTML
         this.createProgressBar();
+        
+        // Load cover background image
+        this.loadCoverBackground();
         
         // Simulate loading progress
         this.simulateProgress();
@@ -54,6 +58,23 @@ class ProgressPreloader {
         this.progressText = this.preloader.querySelector('.progress-text');
         this.progressLabel = this.preloader.querySelector('.progress-label');
         this.loaderStatus = this.preloader.querySelector('.loader-status');
+    }
+    
+    loadCoverBackground() {
+        const bgUrl = 'https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/BG.png';
+        const img = new Image();
+        
+        img.onload = () => {
+            this.coverBgLoaded = true;
+            this.targetProgress = Math.max(this.targetProgress, 30); // Jump to at least 30% when bg loads
+        };
+        
+        img.onerror = () => {
+            this.coverBgLoaded = true; // Continue even if image fails
+            console.warn('Cover background failed to load');
+        };
+        
+        img.src = bgUrl;
     }
     
     simulateProgress() {
@@ -99,7 +120,8 @@ class ProgressPreloader {
         this.targetProgress = 95;
         
         const waitForComplete = setInterval(() => {
-            if (this.currentProgress >= 93) {
+            // Wait for both page ready AND cover background loaded
+            if (this.currentProgress >= 93 && this.coverBgLoaded) {
                 clearInterval(waitForComplete);
                 this.completeLoading();
             } else if (this.currentProgress < this.targetProgress) {
