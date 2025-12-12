@@ -1,4 +1,10 @@
 window.pictureData = [
+  
+  ///////////////////////////////////
+  //                               //
+  //         Design Section        //
+  //                               //
+  ///////////////////////////////////
   {
     "id": "design-1",
     "section": "design",
@@ -64,6 +70,14 @@ window.pictureData = [
     "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami2.png",
     "aspectRatio": 1.33
   },
+
+
+
+  ///////////////////////////////////
+  //                               //
+  //        Artwork Section        //
+  //                               //
+  ///////////////////////////////////
   {
     "id": "art-1",
     "section": "artwork",

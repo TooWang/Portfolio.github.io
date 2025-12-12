@@ -4,16 +4,18 @@
 
 .gallery-section {
     height: 100vh;
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0);
     overflow: hidden;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
 .artwork-section {
-    background: white;
+    background: rgba(255, 255, 255, 0);
 }
 
 .gallery-section .container {
