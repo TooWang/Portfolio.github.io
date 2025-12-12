@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我忘了啦</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="preloader.css">
+    <link rel="stylesheet" href="cover.css">
+    <link rel="stylesheet" href="gallery.css">
+    <link rel="stylesheet" href="contact.css">
 </head>
 
 <body>
@@ -129,6 +134,14 @@
     </section>
 
 
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <span class="lightbox-prev">&#10094;</span>
+        <span class="lightbox-next">&#10095;</span>
+    </div>
+
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
@@ -163,12 +176,10 @@
         </div>
     </section>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <span class="close-lightbox">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
-        <span class="lightbox-prev">&#10094;</span>
-        <span class="lightbox-next">&#10095;</span>
-    </div>
+    <script src="preloader.js"></script>
+    <script src="script.js"></script>
+    <script src="cover.js"></script>
+    <script src="gallery.js"></script>
+    <script src="contact.js"></script>
 </body>
 </html>
