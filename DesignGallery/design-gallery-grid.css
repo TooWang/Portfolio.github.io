@@ -1,0 +1,106 @@
+/* ============================================
+   DESIGN-GALLERY-GRID.CSS
+   Gallery grid and items styling
+   ============================================ */
+
+.masonry-container {
+    margin: 80px auto 40px;
+    padding: 0 20px;
+    max-width: 1600px;
+}
+
+.masonry-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.gallery-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    height: 250px;
+}
+
+/* Gallery Items */
+.masonry-item {
+    height: 250px;
+    flex-grow: 1;
+    margin: 0 5px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.masonry-item:first-child {
+    margin-left: 0;
+}
+
+.masonry-item:last-child {
+    margin-right: 0;
+}
+
+.masonry-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.masonry-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    background-color: #f0f0f0;
+    transition: transform 0.3s ease;
+}
+
+.masonry-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Item Overlay */
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+    color: white;
+    padding: 30px 15px 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.masonry-item:hover .item-overlay {
+    opacity: 1;
+}
+
+.item-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.item-category {
+    font-size: 12px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Loading Placeholder */
+.masonry-item.loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}

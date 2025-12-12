@@ -1,0 +1,90 @@
+/* ============================================
+   DESIGN-GALLERY-RESPONSIVE.CSS
+   Responsive design breakpoints
+   ============================================ */
+
+/* Tablet (1200px) */
+@media (max-width: 1200px) {
+    .masonry-item,
+    .gallery-row {
+        height: 200px;
+    }
+}
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px;
+    }
+    
+    .site-title {
+        font-size: 1.5rem;
+    }
+    
+    .masonry-container {
+        margin-top: 70px;
+        padding: 0 10px;
+    }
+    
+    .masonry-item,
+    .gallery-row {
+        height: 150px;
+    }
+    
+    .masonry-item {
+        margin: 0 3px;
+        border-radius: 6px;
+    }
+    
+    .close-lightbox {
+        top: 15px;
+        right: 20px;
+        font-size: 35px;
+    }
+    
+    .lightbox-info {
+        bottom: 20px;
+        padding: 10px 20px;
+    }
+    
+    .lightbox-info h3 {
+        font-size: 1rem;
+    }
+    
+    .lightbox-info p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+    .site-title {
+        font-size: 1.3rem;
+    }
+    
+    .masonry-item,
+    .gallery-row {
+        height: 120px;
+    }
+    
+    .masonry-grid {
+        gap: 5px;
+    }
+    
+    .masonry-item {
+        margin: 0 2px;
+        border-radius: 4px;
+    }
+    
+    .item-overlay {
+        padding: 20px 10px 10px;
+    }
+    
+    .item-title {
+        font-size: 12px;
+    }
+    
+    .item-category {
+        font-size: 10px;
+    }
+}
