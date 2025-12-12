@@ -14,6 +14,9 @@ class ProgressPreloader {
         this.minLoadTime = 1500; // Minimum 1.5 seconds for preloader to show
         this.startTime = Date.now();
         this.coverBgLoaded = false;
+        this.galleryImagesLoaded = false;
+        this.totalGalleryImages = 0;
+        this.loadedGalleryImages = 0;
         
         this.init();
     }
@@ -24,6 +27,9 @@ class ProgressPreloader {
         
         // Load cover background image
         this.loadCoverBackground();
+        
+        // Load gallery images
+        this.loadGalleryImages();
         
         // Simulate loading progress
         this.simulateProgress();
@@ -77,6 +83,55 @@ class ProgressPreloader {
         img.src = bgUrl;
     }
     
+    async loadGalleryImages() {
+        try {
+            const response = await fetch('./picture-data.json', { cache: 'no-cache' });
+            if (!response.ok) throw new Error('Failed to fetch');
+            const all = await response.json();
+            
+            // Pick 6 random from each section (same logic as gallery.js)
+            const shuffle = arr => {
+                const a = [...arr];
+                for (let i = a.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [a[i], a[j]] = [a[j], a[i]];
+                }
+                return a;
+            };
+            
+            const design = shuffle(all.filter(x => x.section === 'design')).slice(0, 6);
+            const artwork = shuffle(all.filter(x => x.section === 'artwork')).slice(0, 6);
+            const allImages = [...design, ...artwork];
+            
+            this.totalGalleryImages = allImages.length;
+            this.loadedGalleryImages = 0;
+            
+            // Preload all images
+            allImages.forEach(data => {
+                const img = new Image();
+                img.onload = () => {
+                    this.loadedGalleryImages++;
+                    const loadPercent = (this.loadedGalleryImages / this.totalGalleryImages) * 100;
+                    this.targetProgress = Math.max(this.targetProgress, 30 + loadPercent * 0.5); // 30-80%
+                    
+                    if (this.loadedGalleryImages >= this.totalGalleryImages) {
+                        this.galleryImagesLoaded = true;
+                    }
+                };
+                img.onerror = () => {
+                    this.loadedGalleryImages++;
+                    if (this.loadedGalleryImages >= this.totalGalleryImages) {
+                        this.galleryImagesLoaded = true;
+                    }
+                };
+                img.src = data.src;
+            });
+        } catch (error) {
+            console.warn('Failed to preload gallery images:', error);
+            this.galleryImagesLoaded = true; // Continue anyway
+        }
+    }
+    
     simulateProgress() {
         // Progressive loading simulation
         const intervals = [
@@ -120,8 +175,8 @@ class ProgressPreloader {
         this.targetProgress = 95;
         
         const waitForComplete = setInterval(() => {
-            // Wait for both page ready AND cover background loaded
-            if (this.currentProgress >= 93 && this.coverBgLoaded) {
+            // Wait for page ready, cover background AND all gallery images loaded
+            if (this.currentProgress >= 93 && this.coverBgLoaded && this.galleryImagesLoaded) {
                 clearInterval(waitForComplete);
                 this.completeLoading();
             } else if (this.currentProgress < this.targetProgress) {
@@ -154,9 +209,9 @@ class ProgressPreloader {
         if (progress < 25) {
             this.loaderStatus.textContent = 'Initializing...';
         } else if (progress < 50) {
-            this.loaderStatus.textContent = 'Loading resources...';
+            this.loaderStatus.textContent = 'Loading images...';
         } else if (progress < 75) {
-            this.loaderStatus.textContent = 'Rendering content...';
+            this.loaderStatus.textContent = `Loading gallery (${this.loadedGalleryImages}/${this.totalGalleryImages})...`;
         } else if (progress < 95) {
             this.loaderStatus.textContent = 'Finalizing...';
         } else {
