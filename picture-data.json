@@ -49,6 +49,22 @@
     "aspectRatio": 1.33
   },
   {
+    "id": "design-7",
+    "section": "design",
+    "title": "終始機制解析",
+    "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami.png",
+    "aspectRatio": 1.33
+  },
+  {
+    "id": "design-8",
+    "section": "design",
+    "title": "虛無之偶攻略",
+    "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
+    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami2.png",
+    "aspectRatio": 1.33
+  },
+  {
     "id": "art-1",
     "section": "artwork",
     "title": "Artwork Title 1",
