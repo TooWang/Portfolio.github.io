@@ -138,11 +138,13 @@
 
 .overlay h3 {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-weight: 500;
+    margin: 0;
 }
 
 .overlay p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    margin-top: 0rem;
     opacity: 0.9;
 }
 
