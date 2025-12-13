@@ -10,7 +10,7 @@ window.pictureData = [
     "section": "design",
     "title": "Mon3tr CG二創",
     "subtitle": "排版練習",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Design_Mon3tr.png",
+    "src": "https://toowang.space/images/Design_Mon3tr.webp",
     "aspectRatio": 1.33
   },
   {
@@ -18,7 +18,7 @@ window.pictureData = [
     "section": "design",
     "title": "萊茵生命",
     "subtitle": "光影合成練習",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Design_Rhine.png",
+    "src": "https://toowang.space/images/images/Design_Rhine.webp",
     "aspectRatio": 1.33
   },
   {
@@ -26,7 +26,7 @@ window.pictureData = [
     "section": "design",
     "title": "2024年度總結",
     "subtitle": "2024個人年度總結",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Summary2024.png",
+    "src": "https://toowang.space/images/Design/Design_Summary2024.webp",
     "aspectRatio": 1,
     "objectPosition": "50% 60%"
   },
@@ -35,7 +35,7 @@ window.pictureData = [
     "section": "design",
     "title": "寄術杯#4",
     "subtitle": "明日方舟繁中服非官方肉鴿比賽\"寄術杯\"美術包裝",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/SBC4.png",
+    "src": "https://toowang.space/images/Design/Design_SBC4.webp",
     "aspectRatio": 1.33
   },
   {
@@ -43,7 +43,7 @@ window.pictureData = [
     "section": "design",
     "title": "終末地\"全面測試\"直播封面",
     "subtitle": "",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_EdfieldStream.png",
+    "src": "https://toowang.space/images/Design/Cover_EdfieldStream.webp",
     "aspectRatio": 1.33
   },
   {
@@ -51,7 +51,7 @@ window.pictureData = [
     "section": "design",
     "title": "終末地\"全面測試\"直播封面",
     "subtitle": "",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_Endfield.png",
+    "src": "https://toowang.space/images/Design/Cover_Endfield.webp",
     "aspectRatio": 1.33
   },
   {
@@ -59,7 +59,7 @@ window.pictureData = [
     "section": "design",
     "title": "終末地\"全面測試\"直播封面",
     "subtitle": "",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_Endfield2.png",
+    "src": "https://toowang.space/images/Design/Cover_Endfield2.webp",
     "aspectRatio": 1.33
   },
   {
@@ -67,7 +67,7 @@ window.pictureData = [
     "section": "design",
     "title": "終末地\"再次測試\"玩法解析影片封面",
     "subtitle": "",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Cover_EndfieldGameplay.png",
+    "src": "https://toowang.space/images/Design/Cover_EndfieldGameplay.webp",
     "aspectRatio": 1.33
   },
   {
@@ -75,7 +75,7 @@ window.pictureData = [
     "section": "design",
     "title": "幹員文本自動化工具",
     "subtitle": "泰拉旅社語音解包工作流",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/VoiceToTextTool.png",
+    "src": "https://toowang.space/images/Design/VoiceToTextTool.webp",
     "aspectRatio": 1.33
   },
   {
@@ -83,7 +83,7 @@ window.pictureData = [
     "section": "design",
     "title": "終始機制解析",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami1.png",
+    "src": "https://toowang.space/images/Design/Sami1.webp",
     "aspectRatio": 1.33
   },
   {
@@ -91,7 +91,7 @@ window.pictureData = [
     "section": "design",
     "title": "虛無之偶攻略",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami2.png",
+    "src": "https://toowang.space/images/Design/Sami2.webp",
     "aspectRatio": 1.33
   },
   {
@@ -99,7 +99,7 @@ window.pictureData = [
     "section": "design",
     "title": "內容拓展更新",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami3.png",
+    "src": "https://toowang.space/images/Design/Sami3.webp",
     "aspectRatio": 1.33
   },
   {
@@ -107,7 +107,7 @@ window.pictureData = [
     "section": "design",
     "title": "哨兵攻略",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami4.png",
+    "src": "https://toowang.space/images/Design/Sami4.webp",
     "aspectRatio": 1.33
   },
   {
@@ -115,7 +115,7 @@ window.pictureData = [
     "section": "design",
     "title": "深寒造像攻略",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami5.png",
+    "src": "https://toowang.space/images/Design/Sami5.webp",
     "aspectRatio": 1.33
   },
   {
@@ -123,7 +123,7 @@ window.pictureData = [
     "section": "design",
     "title": "終始打法攻略",
     "subtitle": "啊?戈爾舟遊籌措會 薩米系列攻略影片封面",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/Sami6.png",
+    "src": "https://toowang.space/images/Design/Sami6.webp",
     "aspectRatio": 1.33
   },
   {
@@ -131,7 +131,7 @@ window.pictureData = [
     "section": "design",
     "title": "戈爾舟遊籌措會 成員情報網",
     "subtitle": "啊?戈爾舟遊籌措會二周年 成員關係網路統計",
-    "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/gallery/AegirNetwork.png",
+    "src": "https://toowang.space/images/Design/AegirNetwork.webp",
     "aspectRatio": 1.33
   },
 
