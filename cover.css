@@ -36,7 +36,7 @@ body {
 
 .cover {
     height: 100vh;
-    background: url('https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/BG.png') center/cover no-repeat fixed;
+    background: url('https://www.toowang.space/BG.webp') center/cover no-repeat fixed;
     display: flex;
     align-items: center;
     justify-content: flex-end;

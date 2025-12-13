@@ -24,7 +24,7 @@
     right: 0;
     bottom: 0;
     background: rgba(34, 34, 34, 0.9);
-    background: url(https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/Preloading_BG.png) center/cover no-repeat;
+    background: url('https://www.toowang.space/Bottom_BG.webp') center/cover no-repeat;
     z-index: 0;
 }
 
