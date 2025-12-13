@@ -10,14 +10,6 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    position: relative;
-    z-index: 0;
-    margin: 0;
-    border: 0;
-}
-
-.contact-section::before {
-    display: none;
 }
 
 .contact-section .container {
@@ -27,8 +19,6 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    position: relative;
-    z-index: 1;
 }
 
 .contact-section .section-title {

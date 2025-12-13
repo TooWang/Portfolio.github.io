@@ -4,20 +4,18 @@
 
 .gallery-section {
     height: 100vh;
-    background: url('https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/Section_BG.png') center/cover no-repeat fixed;
+    background: rgba(248, 249, 250, 0);
     overflow: hidden;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 0;
-    margin: 0;
-    border: 0;
+    z-index: 1;
 }
 
-.artwork-section::before {
-    background: rgba(255, 255, 255, 0.85);
+.artwork-section {
+    background: rgba(255, 255, 255, 0);
 }
 
 .gallery-section .container {
@@ -30,8 +28,6 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    position: relative;
-    z-index: 1;
 }
 
 .section-title {
@@ -40,8 +36,6 @@
     margin-bottom: -1rem;
     color: #333;
     width: 100%;
-    position: relative;
-    z-index: 1;
 }
 
 .section-subtitle {
