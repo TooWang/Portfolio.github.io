@@ -4,7 +4,7 @@
 
 .contact-section {
     height: 100vh;
-    background: #222;
+    background: transparent;
     color: white;
     display: flex;
     align-items: center;
@@ -17,7 +17,14 @@
 }
 
 .contact-section::before {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(34, 34, 34, 0.9);
+    z-index: 0;
 }
 
 .contact-section .container {

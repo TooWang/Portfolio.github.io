@@ -4,7 +4,7 @@
 
 .gallery-section {
     height: 100vh;
-    background: url('https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/Section_BG.png') center/cover no-repeat fixed;
+    background: transparent;
     overflow: hidden;
     box-sizing: border-box;
     display: flex;
@@ -16,8 +16,14 @@
     border: 0;
 }
 
-.artwork-section::before {
-    background: rgba(255, 255, 255, 0.85);
+.gallery-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
 }
 
 .gallery-section .container {
