@@ -60,7 +60,6 @@ body {
     position: relative;
     z-index: 1;
     padding-bottom: 20vh;
-    scroll-snap-align: start;
 }
 
 .cover::before {

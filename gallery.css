@@ -4,7 +4,7 @@
 
 .gallery-section {
     height: 100vh;
-    background: rgba(248, 249, 250, 0);
+    background: rgba(248, 249, 250, 0.85);
     overflow: hidden;
     box-sizing: border-box;
     display: flex;
@@ -12,11 +12,10 @@
     justify-content: center;
     position: relative;
     z-index: 1;
-    scroll-snap-align: start;
 }
 
 .artwork-section {
-    background: rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .gallery-section .container {
@@ -33,23 +32,10 @@
 
 .section-title {
     text-align: center;
-    margin-bottom: -1.5rem;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
     color: #333;
     width: 100%;
-    z-index: 999;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-weight: 100;
-    letter-spacing: 2rem;
-    font-size: 2.5rem;
-    margin-top: -3rem;
-    margin-bottom: 2rem;
-    color: rgba(0, 0, 0, 0.3);
-    width: 100%;
-    z-index: 998;
 }
 
 .gallery-grid {
