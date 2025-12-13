@@ -36,9 +36,20 @@
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 4rem;
+    margin-bottom: -1rem;
     color: #333;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 3rem;
+    letter-spacing: 2rem;
+    margin-top: -3rem;
+    color: rgba(255, 255, 255, 0.3);
     width: 100%;
     position: relative;
     z-index: 1;
