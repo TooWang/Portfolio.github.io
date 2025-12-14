@@ -295,15 +295,6 @@ window.pictureData = [
     "featured": true
   },
   {
-    "id": "Design_Lapp",
-    "section": "design",
-    "title": "物料製作",
-    "subtitle": "漂流瓶瓶瓶瓶子物料製作",
-    "src": "https://www.toowang.space/Design/Design_Lapp.webp",
-    "aspectRatio": 1.33,
-    "featured": true
-  },
-  {
     "id": "Handband_Thorns",
     "section": "design",
     "title": "物料製作",
