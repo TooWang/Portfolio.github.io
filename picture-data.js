@@ -90,7 +90,7 @@ window.pictureData = [
     "section": "design",
     "title": "寄術杯#3",
     "subtitle": "明日方舟繁中服非官方肉鴿比賽\"寄術杯\"美術包裝",
-    "src": "https://www.toowang.space/Design/Cover_SBC33.webp",
+    "src": "https://www.toowang.space/Design/Cover_SBC3.webp",
     "aspectRatio": 1.33
   },
   {
