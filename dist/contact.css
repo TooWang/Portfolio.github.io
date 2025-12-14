@@ -139,6 +139,18 @@
 
 /* Contact Section - Mobile */
 @media (max-width: 768px) {
+    .contact-section .section-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-section .section-subtitle {
+        font-size: 1rem;
+        margin-top: -4rem;
+        margin-bottom: 1rem;
+        letter-spacing: 1rem;
+    }
+
     .contact-text {
         font-size: 0.6rem;
         margin-bottom: 0.5rem;
