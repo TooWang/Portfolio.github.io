@@ -11,7 +11,8 @@ window.pictureData = [
     "title": "薩米系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 終始機制解析封面",
     "src": "https://www.toowang.space/Design/Cover_Sami1.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sami2",
@@ -19,7 +20,8 @@ window.pictureData = [
     "title": "薩米系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 虛無之偶攻略封面",
     "src": "https://www.toowang.space/Design/Cover_Sami2.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sami3",
@@ -27,7 +29,8 @@ window.pictureData = [
     "title": "薩米系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 內容拓展更新封面",
     "src": "https://www.toowang.space/Design/Cover_Sami3.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sami4",
@@ -35,7 +38,8 @@ window.pictureData = [
     "title": "薩米系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 哨兵攻略封面",
     "src": "https://www.toowang.space/Design/Cover_Sami4.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sami5",
@@ -43,7 +47,8 @@ window.pictureData = [
     "title": "薩米系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 深寒造像攻略封面",
     "src": "https://www.toowang.space/Design/Cover_Sami5.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sami6",
@@ -51,7 +56,8 @@ window.pictureData = [
     "title": "薩米系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 終始打法攻略封面",
     "src": "https://www.toowang.space/Design/Cover_Sami6.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sarkaz1",
@@ -59,7 +65,8 @@ window.pictureData = [
     "title": "薩卡茲系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 薩卡茲肉鴿解析封面",
     "src": "https://www.toowang.space/Design/Cover_Sarkaz1.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sarkaz2",
@@ -67,7 +74,8 @@ window.pictureData = [
     "title": "薩卡茲系列攻略影片封面",
     "subtitle": "啊?戈爾舟遊籌措會攻略影片 內容拓展更新封面",
     "src": "https://www.toowang.space/Design/Cover_Sarkaz2.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "SBC2",
@@ -75,7 +83,8 @@ window.pictureData = [
     "title": "寄術杯#2",
     "subtitle": "明日方舟繁中服非官方肉鴿比賽\"寄術杯\"美術包裝",
     "src": "https://www.toowang.space/Design/Cover_SBC2.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "SBC2_Ending",
@@ -83,7 +92,8 @@ window.pictureData = [
     "title": "寄術杯#2 謝幕",
     "subtitle": "明日方舟繁中服非官方肉鴿比賽\"寄術杯\"美術包裝",
     "src": "https://www.toowang.space/Design/Cover_SBC2-ending.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "SBC3",
@@ -91,7 +101,8 @@ window.pictureData = [
     "title": "寄術杯#3",
     "subtitle": "明日方舟繁中服非官方肉鴿比賽\"寄術杯\"美術包裝",
     "src": "https://www.toowang.space/Design/Cover_SBC3.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "SBC4",
@@ -99,7 +110,8 @@ window.pictureData = [
     "title": "寄術杯#4",
     "subtitle": "明日方舟繁中服非官方肉鴿比賽\"寄術杯\"美術包裝",
     "src": "https://www.toowang.space/Design/Cover_SBC4.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "DOS Cover",
@@ -107,7 +119,8 @@ window.pictureData = [
     "title": "紛爭演譯禁選制活動宣傳圖",
     "subtitle": "",
     "src": "https://www.toowang.space/Design/CoverDOS.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "CCB2-830",
@@ -115,7 +128,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "危機合約濁燃行動 近特分支830影片封面",
     "src": "https://www.toowang.space/Design/Cover_CCB2-830.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "CCB3-940",
@@ -123,7 +137,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "危機合約淨罪行動 近重分支7人940影片封面",
     "src": "https://www.toowang.space/Design/Cover_CCB3-940.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "SniperOnly705",
@@ -131,7 +146,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "危機合約淨罪作戰純狙擊705影片封面",
     "src": "https://www.toowang.space/Design/Cover_Sniper705.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Lupo only CWS4",
@@ -139,7 +155,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "魯珀隊CW-S-4突襲",
     "src": "https://www.toowang.space/Design/Cover_CWS4.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "GO-EX-8 Rhine",
@@ -147,7 +164,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "萊茵生命隊GO-EX-8突襲",
     "src": "https://www.toowang.space/Design/Cover_GO-EX-8_2.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Sniper Only H13-4",
@@ -155,7 +173,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "四狙H13-4",
     "src": "https://www.toowang.space/Design/Cover_H13-4.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Interview Cover",
@@ -163,7 +182,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "萬星源入組面試考題",
     "src": "https://www.toowang.space/Design/Cover_interview.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "EdfieldStream",
@@ -171,7 +191,8 @@ window.pictureData = [
     "title": "直播封面",
     "subtitle": "國一暴力鴻雪廚直播間封面",
     "src": "https://www.toowang.space/Design/Cover_White.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "EdfieldStream",
@@ -179,7 +200,8 @@ window.pictureData = [
     "title": "直播封面",
     "subtitle": "終末地\"全面測試\"直播封面",
     "src": "https://www.toowang.space/Design/Cover_EdfieldStream.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Endfield Cover1",
@@ -187,7 +209,8 @@ window.pictureData = [
     "title": "終末地風格排版練習",
     "subtitle": "",
     "src": "https://www.toowang.space/Design/Cover_Endfield.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Endfield Cover2",
@@ -195,7 +218,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "終末地\"全面測試\"直播封面",
     "src": "https://www.toowang.space/Design/Cover_Endfield2.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Endfield Gameplay Cover",
@@ -203,7 +227,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "終末地\"再次測試\"玩法解析影片封面",
     "src": "https://www.toowang.space/Design/Cover_EndfieldGameplay.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Stronghole Protocal",
@@ -211,7 +236,8 @@ window.pictureData = [
     "title": "攻略影片封面",
     "subtitle": "衛戍協議策略操作筆記影片封面",
     "src": "https://www.toowang.space/Design/Cover_EndfieldGameplay.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "VoiceToTextTool",
@@ -219,7 +245,8 @@ window.pictureData = [
     "title": "幹員文本自動化工具",
     "subtitle": "泰拉旅社語音解包工作流",
     "src": "https://www.toowang.space/Design/VoiceToTextTool.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Summary2024",
@@ -228,7 +255,8 @@ window.pictureData = [
     "subtitle": "2024個人年度總結",
     "src": "https://www.toowang.space/Design/Design_Summary2024.webp",
     "aspectRatio": 1,
-    "objectPosition": "50% 60%"
+    "objectPosition": "50% 60%",
+    "featured": true
   },
   {
     "id": "AegirNetwork",
@@ -236,7 +264,8 @@ window.pictureData = [
     "title": "戈爾舟遊籌措會 成員情報網",
     "subtitle": "啊?戈爾舟遊籌措會二周年 成員關係網路統計",
     "src": "https://www.toowang.space/Design/Design_AegirNetwork.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Design_Mon3tr",
@@ -244,7 +273,8 @@ window.pictureData = [
     "title": "Mon3tr",
     "subtitle": "排版練習",
     "src": "https://www.toowang.space/Design/Design_Mon3tr.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "Design_Rhine",
@@ -252,10 +282,9 @@ window.pictureData = [
     "title": "萊茵生命",
     "subtitle": "光影合成練習",
     "src": "https://www.toowang.space/Design/Design_Rhine.webp",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
-
-
 
 
   ///////////////////////////////////
@@ -267,52 +296,58 @@ window.pictureData = [
     "id": "art-1",
     "section": "artwork",
     "title": "Artwork Title 1",
-    "subtitle": "Medium: Digital Art",
+    "subtitle": "",
     "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat1.png",
     "aspectRatio": 1.33,
-    "objectPosition": "50% 10%"
+    "objectPosition": "50% 10%",
+    "featured": true
   },
   {
     "id": "art-2",
     "section": "artwork",
     "title": "Artwork Title 2",
-    "subtitle": "Medium: Oil Painting",
+    "subtitle": "",
     "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat2.png",
     "aspectRatio": 1.33,
-    "objectPosition": "50% 10%"
+    "objectPosition": "50% 10%",
+    "featured": true
   },
   {
     "id": "art-3",
     "section": "artwork",
     "title": "Artwork Title 3",
-    "subtitle": "Medium: Watercolor",
+    "subtitle": "",
     "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat3.png",
     "aspectRatio": 1.33,
-    "objectPosition": "50% 20%"
+    "objectPosition": "50% 20%",
+    "featured": true
   },
   {
     "id": "art-4",
     "section": "artwork",
     "title": "Artwork Title 4",
-    "subtitle": "Medium: Mixed Media",
+    "subtitle": "",
     "src": "https://pub-c8fcb62ea5604841ae8b588759ae3d38.r2.dev/artwork/Greythroat4.png",
     "aspectRatio": 1.33,
-    "objectPosition": "50% 10%"
+    "objectPosition": "50% 10%",
+    "featured": true
   },
   {
     "id": "art-5",
     "section": "artwork",
     "title": "Artwork Title 5",
-    "subtitle": "Medium: Pencil Sketch",
+    "subtitle": "",
     "src": "https://via.placeholder.com/400x300",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   },
   {
     "id": "art-6",
     "section": "artwork",
     "title": "Artwork Title 6",
-    "subtitle": "Medium: Digital Illustration",
+    "subtitle": "",
     "src": "https://via.placeholder.com/400x300",
-    "aspectRatio": 1.33
+    "aspectRatio": 1.33,
+    "featured": true
   }
 ];
