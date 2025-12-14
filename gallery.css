@@ -177,6 +177,13 @@
         font-size: 2rem;
         margin-bottom: 1.5rem;
     }
+
+    .section-subtitle {
+        font-size: 1rem;
+        margin-top: -2rem;
+        margin-bottom: 1rem;
+        letter-spacing: 1rem;
+    }
     
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
