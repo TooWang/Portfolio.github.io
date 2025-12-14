@@ -235,8 +235,10 @@ class ProgressPreloader {
     }
     
     completeLoading() {
+        if (this.isComplete) return; // Prevent double execution
+        
         const elapsedTime = Date.now() - this.startTime;
-        const remainingTime = Math.max(0, this.minLoadTime - elapsedTime);
+        const remainingTime = this.isMobile ? 0 : Math.max(0, this.minLoadTime - elapsedTime);
         
         setTimeout(() => {
             // Quick final push to 100%
@@ -245,10 +247,10 @@ class ProgressPreloader {
             this.progressText.textContent = '100%';
             this.loaderStatus.textContent = 'Complete!';
             
-            // Fade out after a brief moment
+            // Fade out immediately on mobile, brief delay on desktop
             setTimeout(() => {
                 this.fadeOut();
-            }, 300);
+            }, this.isMobile ? 100 : 300);
         }, remainingTime);
     }
     
