@@ -233,11 +233,20 @@ window.pictureData = [
   {
     "id": "Stronghole Protocal",
     "section": "design",
-    "title": "攻略影片封面",
+    "title": "攻略圖文",
     "subtitle": "衛戍協議策略操作筆記影片封面",
     "src": "https://www.toowang.space/Design/Cover_EndfieldGameplay.webp",
     "aspectRatio": 1.33,
     "featured": true
+  },
+  {
+    "id": "Material list",
+    "section": "design",
+    "title": "攻略圖文",
+    "subtitle": "明日方舟繁中服\"未來視\"活動素材掉落表",
+    "src": "https://www.toowang.space/Design/Other_MaterialList.webp",
+    "aspectRatio": 1.33,
+    "featured": false
   },
   {
     "id": "VoiceToTextTool",
@@ -268,20 +277,155 @@ window.pictureData = [
     "featured": true
   },
   {
-    "id": "Design_Mon3tr",
+    "id": "Design_Lapp",
     "section": "design",
-    "title": "Mon3tr",
-    "subtitle": "排版練習",
-    "src": "https://www.toowang.space/Design/Design_Mon3tr.webp",
+    "title": "物料製作",
+    "subtitle": "漂流瓶瓶瓶瓶子物料製作",
+    "src": "https://www.toowang.space/Design/Design_Lapp.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "Design_Texas",
+    "section": "design",
+    "title": "物料製作",
+    "subtitle": "漂流瓶瓶瓶瓶子物料製作",
+    "src": "https://www.toowang.space/Design/Design_Texas.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "Design_Lapp",
+    "section": "design",
+    "title": "物料製作",
+    "subtitle": "漂流瓶瓶瓶瓶子物料製作",
+    "src": "https://www.toowang.space/Design/Design_Lapp.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "Handband_Thorns",
+    "section": "design",
+    "title": "物料製作",
+    "subtitle": "一眼半生籌物料製作",
+    "src": "https://www.toowang.space/Design/Other_Thorns.webp",
+    "aspectRatio": 1.33,
+    "featured": false
+  },
+  {
+    "id": "Handband_Makura",
+    "section": "design",
+    "title": "物料製作",
+    "subtitle": "花崎Makura物料製作",
+    "src": "https://www.toowang.space/Design/Other_Makura.webp",
+    "aspectRatio": 1.33,
+    "featured": false
+  },
+  {
+    "id": "StreamUI_6th",
+    "section": "design",
+    "title": "直播UI設計",
+    "subtitle": "眾生行記直播間UI",
+    "src": "https://www.toowang.space/Design/StreamUI_6th.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "StreamUI_SBC2",
+    "section": "design",
+    "title": "直播UI設計",
+    "subtitle": "寄術杯#2直播間UI",
+    "src": "https://www.toowang.space/Design/StreamUI_SBC2.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "StreamUI_SBC3",
+    "section": "design",
+    "title": "直播UI設計",
+    "subtitle": "寄術杯#3直播間UI",
+    "src": "https://www.toowang.space/Design/StreamUI_SBC3.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "StreamUI_SBC4",
+    "section": "design",
+    "title": "直播UI設計",
+    "subtitle": "寄術杯#4直播間UI",
+    "src": "https://www.toowang.space/Design/StreamUI_SBC4.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "StreamUI_Endfield",
+    "section": "design",
+    "title": "直播UI設計",
+    "subtitle": "終末地直播間UI",
+    "src": "https://www.toowang.space/Design/StreamUI_Endfield.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "TerraHR",
+    "section": "design",
+    "title": "宣傳圖設計",
+    "subtitle": "為泰拉旅社設計公開招募用長圖",
+    "src": "https://www.toowang.space/Design/Design_TerraHostel-HR.webp",
+    "aspectRatio": 1.33,
+    "featured": false
+  },
+  {
+    "id": "TerraHR",
+    "section": "design",
+    "title": "宣傳圖設計",
+    "subtitle": "為泰拉旅社設計粉絲群宣傳圖",
+    "src": "https://www.toowang.space/Design/Design_TerraHostel.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "TerraGift",
+    "section": "design",
+    "title": "宣傳圖設計",
+    "subtitle": "為泰拉旅社設計音律聯覺無料宣傳圖",
+    "src": "https://www.toowang.space/Design/Design_TerraHostel-Gift.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "Design_Offline",
+    "section": "design",
+    "title": "自由設計",
+    "subtitle": "我操！脫機",
+    "src": "https://www.toowang.space/Design/Design_Offline.webp",
     "aspectRatio": 1.33,
     "featured": true
   },
   {
     "id": "Design_Rhine",
     "section": "design",
-    "title": "萊茵生命",
-    "subtitle": "光影合成練習",
+    "title": "自由設計",
+    "subtitle": "萊茵生命",
     "src": "https://www.toowang.space/Design/Design_Rhine.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "Design_Mon3tr",
+    "section": "design",
+    "title": "自由練習",
+    "subtitle": "Mon3tr",
+    "src": "https://www.toowang.space/Design/Design_Mon3tr.webp",
+    "aspectRatio": 1.33,
+    "featured": true
+  },
+  {
+    "id": "PepeBigAss",
+    "section": "design",
+    "title": "自由練習",
+    "subtitle": "給隆城呼籲配圖\"火車甩在身後\"",
+    "src": "https://www.toowang.space/Design/Other_PepeBigAss.webp",
     "aspectRatio": 1.33,
     "featured": true
   },
