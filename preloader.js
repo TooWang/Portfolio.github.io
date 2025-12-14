@@ -17,6 +17,7 @@ class ProgressPreloader {
         this.galleryImagesLoaded = false;
         this.totalGalleryImages = 0;
         this.loadedGalleryImages = 0;
+        this.isMobile = window.innerWidth <= 768;
         
         this.init();
     }
@@ -59,11 +60,13 @@ class ProgressPreloader {
         // Load cover background image
         this.loadCoverBackground();
         
-        // Load gallery images
-        this.loadGalleryImages();
-        
-        // Simulate loading progress
-        this.simulateProgress();
+        // Load gallery images only on desktop
+        if (!this.isMobile) {
+            this.loadGalleryImages();
+        } else {
+            // Skip gallery preloading on mobile for faster load
+            this.galleryImagesLoaded = true;
+        }
         
         // Wait for page to fully load
         if (document.readyState === 'loading') {
@@ -75,9 +78,9 @@ class ProgressPreloader {
         // Fallback timeout
         setTimeout(() => {
             if (!this.isComplete) {
-                this.setProgress(100);
+                this.completeLoading();
             }
-        }, 5000);
+        }, this.isMobile ? 3000 : 5000);
     }
     
     createProgressBar() {
@@ -103,13 +106,16 @@ class ProgressPreloader {
         
         img.onload = () => {
             this.coverBgLoaded = true;
-            this.currentProgress = Math.max(this.currentProgress, 10);
-            this.targetProgress = Math.max(this.targetProgress, 10);
+            this.currentProgress = this.isMobile ? 80 : 10;
+            this.targetProgress = this.isMobile ? 80 : 10;
             this.updateProgressBar();
         };
         
         img.onerror = () => {
             this.coverBgLoaded = true; // Continue even if image fails
+            this.currentProgress = this.isMobile ? 80 : 10;
+            this.targetProgress = this.isMobile ? 80 : 10;
+            this.updateProgressBar();
             console.warn('Cover background failed to load');
         };
         
@@ -130,8 +136,8 @@ class ProgressPreloader {
                 return a;
             };
             
-            const design = shuffle(all.filter(x => x.section === 'design')).slice(0, 6);
-            const artwork = shuffle(all.filter(x => x.section === 'artwork')).slice(0, 6);
+            const design = shuffle(all.filter(x => x.section === 'design' && x.featured !== false)).slice(0, 6);
+            const artwork = shuffle(all.filter(x => x.section === 'artwork' && x.featured !== false)).slice(0, 6);
             const allImages = [...design, ...artwork];
             
             // Store selected images for gallery.js to use
@@ -184,10 +190,6 @@ class ProgressPreloader {
         }
     }
     
-    simulateProgress() {
-        // No simulation needed - progress is controlled by actual loading events
-    }
-    
     onPageReady() {
         // Check completion status
         const checkCompletion = setInterval(() => {
@@ -222,9 +224,9 @@ class ProgressPreloader {
         if (progress < 25) {
             this.loaderStatus.textContent = 'Initializing...';
         } else if (progress < 50) {
-            this.loaderStatus.textContent = 'Loading images...';
+            this.loaderStatus.textContent = this.isMobile ? 'Loading...' : 'Loading images...';
         } else if (progress < 75) {
-            this.loaderStatus.textContent = `Loading gallery (${this.loadedGalleryImages}/${this.totalGalleryImages})...`;
+            this.loaderStatus.textContent = this.isMobile ? 'Loading...' : `Loading gallery (${this.loadedGalleryImages}/${this.totalGalleryImages})...`;
         } else if (progress < 95) {
             this.loaderStatus.textContent = 'Finalizing...';
         } else {
