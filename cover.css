@@ -111,13 +111,13 @@ body {
 /* Cover Section - Mobile */
 @media (max-width: 768px) {
     .cover-title {
-        font-size: 2rem;
+        font-size: 1.2rem;
         font-weight: 250;
         padding: 0 1rem;
     }
     .cover-subtitle {
-        font-size: 0.6rem;
-        margin-top: 0.25rem;
+        font-size: 0.3rem;
+        margin-top: 0rem;
         padding: 0 1rem;
     }
 }
