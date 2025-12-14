@@ -441,7 +441,7 @@ window.pictureData = [
     "section": "artwork",
     "title": "灰喉",
     "subtitle": "",
-    "src": "https://www.toowang.space/Artwork/Greythroat1.webp",
+    "src": "https://www.toowang.space/Artwork/GreyThroat1.webp",
     "aspectRatio": 1.33,
     "objectPosition": "50% 10%",
     "featured": true
@@ -451,7 +451,7 @@ window.pictureData = [
     "section": "artwork",
     "title": "灰喉",
     "subtitle": "",
-    "src": "https://www.toowang.space/Artwork/Greythroat2.webp",
+    "src": "https://www.toowang.space/Artwork/GreyThroat2.webp",
     "aspectRatio": 1.33,
     "objectPosition": "50% 10%",
     "featured": true
@@ -461,7 +461,7 @@ window.pictureData = [
     "section": "artwork",
     "title": "灰喉",
     "subtitle": "",
-    "src": "https://www.toowang.space/Artwork/Greythroat3.webp",
+    "src": "https://www.toowang.space/Artwork/GreyThroat3.webp",
     "aspectRatio": 1.33,
     "objectPosition": "50% 20%",
     "featured": true
@@ -471,7 +471,7 @@ window.pictureData = [
     "section": "artwork",
     "title": "灰喉",
     "subtitle": "",
-    "src": "https://www.toowang.space/Artwork/Greythroat4.webp",
+    "src": "https://www.toowang.space/Artwork/GreyThroat4.webp",
     "aspectRatio": 1.33,
     "objectPosition": "50% 10%",
     "featured": true
