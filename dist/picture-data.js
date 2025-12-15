@@ -248,7 +248,7 @@ window.pictureData = [
     "section": "design",
     "title": "攻略圖文",
     "subtitle": "衛戍協議策略操作筆記影片封面",
-    "src": "https://www.toowang.space/Design/Cover_EndfieldGameplay.webp",
+    "src": "https://www.toowang.space/Design/Cover_Stronghole.webp",
     "aspectRatio": 1.78,
     "featured": true
   },

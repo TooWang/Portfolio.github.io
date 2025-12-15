@@ -1,0 +1,70 @@
+/* Cover Section Styles */
+.gallery-cover {
+    width: 100%;
+    min-height: 240px;
+    height: 32vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.35)),
+        url('https://www.toowang.space/BG.webp') center/cover no-repeat;
+    color: #fff;
+}
+
+.gallery-cover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+}
+
+.gallery-cover-title {
+    font-size: 4rem;
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+    letter-spacing: 0.5rem;
+    display: block;
+    margin: 0 auto;
+    align-self: center;
+}
+
+.gallery-cover-subtitle {
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 0.3rem;
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+}
+
+/* Background wrapper under cover for gallery area */
+.gallery-section-wrapper {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.96)),
+        url('https://www.toowang.space/Section_BG.webp') center/cover no-repeat;
+    padding: 3rem 1.5rem 4rem;
+}
+
+
+
+/* Cover Section - Mobile */
+@media (max-width: 768px) {
+    .cover-title {
+        font-size: 2rem;
+        font-weight: 250;
+        padding: 0 1rem;
+    }
+    .cover-subtitle {
+        font-size: 0.8rem;
+        font-weight: 100;
+        margin-top: 0rem;
+        padding: 0rem;
+    }
+}
