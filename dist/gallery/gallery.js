@@ -194,13 +194,14 @@ class JustifiedMasonryGallery {
         }
 
         const options = {
-            threshold: 0.2,
-            rootMargin: '40px 0px'
+            threshold: 0.1,
+            rootMargin: '50px'
         };
 
         this.scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
+                    // Add visible class with proper stagger delay on scroll-in
                     entry.target.classList.add('is-visible');
                     this.scrollObserver.unobserve(entry.target);
                 }
@@ -208,11 +209,24 @@ class JustifiedMasonryGallery {
         }, options);
 
         const items = this.grid.querySelectorAll('.gallery-item');
+        let visibleCount = 0;
+        
         items.forEach((item, index) => {
             item.classList.remove('is-visible');
-            const delay = Math.min(index * 50, 600); // stagger top-to-bottom
-            item.style.transitionDelay = `${delay}ms`;
-            this.scrollObserver.observe(item);
+            // Check if item is already in viewport
+            const rect = item.getBoundingClientRect();
+            const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isInitiallyVisible) {
+                // Immediate visibility for initial viewport items, with minimal stagger
+                item.style.transitionDelay = `${visibleCount * 40}ms`;
+                item.classList.add('is-visible');
+                visibleCount++;
+            } else {
+                // Reset delay for observed items
+                item.style.transitionDelay = '0ms';
+                this.scrollObserver.observe(item);
+            }
         });
     }
 
