@@ -8,24 +8,28 @@
     <link rel="stylesheet" href="gallery.css">
 </head>
 <body>
-    <div class="gallery-container">
-        <header>
-            <h1>相冊</h1>
-            <p>瀏覽所有作品</p>
-        </header>
+    <section class="gallery-cover">
+        <div class="gallery-cover-content">
+            <h1 class="gallery-cover-title">相冊</h1>
+            <p class="gallery-cover-subtitle">瀏覽所有作品</p>
+        </div>
+    </section>
 
-        <div class="masonry-grid" id="masonryGrid"></div>
+    <section class="gallery-section-wrapper">
+        <div class="gallery-container">
+            <div class="masonry-grid" id="masonryGrid"></div>
 
-        <!-- Lightbox Modal -->
-        <div id="lightbox" class="lightbox">
-            <span class="lightbox-close">&times;</span>
-            <img id="lightbox-img" src="" alt="">
-            <div class="lightbox-info">
-                <h2 id="lightbox-title"></h2>
-                <p id="lightbox-subtitle"></p>
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="lightbox">
+                <span class="lightbox-close">&times;</span>
+                <img id="lightbox-img" src="" alt="">
+                <div class="lightbox-info">
+                    <h2 id="lightbox-title"></h2>
+                    <p id="lightbox-subtitle"></p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <script src="../picture-data.js"></script>
     <script src="gallery.js"></script>
