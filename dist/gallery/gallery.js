@@ -67,34 +67,34 @@ class JustifiedMasonryGallery {
     createRows() {
         const rows = [];
         let currentRow = [];
-        let currentRowAspectSum = 0;
+        let currentRowWidth = 0;
         const gap = 12; // px
+        const fixedHeight = this.targetRowHeight; // 使用固定高度
 
         for (let i = 0; i < this.allImages.length; i++) {
             const image = this.allImages[i];
             const aspectRatio = image.aspectRatio || 1.5;
-
-            currentRow.push(image);
-            currentRowAspectSum += aspectRatio;
-
-            // Calculate if row should break
-            const potentialRowWidth = (currentRowAspectSum * this.targetRowHeight) + 
-                                     ((currentRow.length - 1) * gap);
             
-            // Break if row exceeds container or it's the last image
-            if (potentialRowWidth > this.containerWidth || i === this.allImages.length - 1) {
-                // Add padding to prevent excessive stretching on last row
-                if (i === this.allImages.length - 1 && potentialRowWidth < this.containerWidth * 0.85) {
-                    // Just add to current row, don't force break
-                } else {
-                    rows.push([...currentRow]);
-                    currentRow = [];
-                    currentRowAspectSum = 0;
-                }
+            // 計算這張圖片在固定高度下的寬度
+            const imageWidth = fixedHeight * aspectRatio;
+            
+            // 計算加入這張圖片後的總寬度（包括間距）
+            const gapWidth = currentRow.length > 0 ? gap : 0;
+            const potentialWidth = currentRowWidth + gapWidth + imageWidth;
+            
+            // 如果加入這張圖片會超過容器寬度，且當前行不是空的，就開始新行
+            if (potentialWidth > this.containerWidth && currentRow.length > 0) {
+                rows.push([...currentRow]);
+                currentRow = [image];
+                currentRowWidth = imageWidth;
+            } else {
+                // 可以加入當前行
+                currentRow.push(image);
+                currentRowWidth = potentialWidth;
             }
         }
 
-        // Add remaining items if any
+        // 添加最後一行
         if (currentRow.length > 0) {
             rows.push(currentRow);
         }
@@ -107,23 +107,18 @@ class JustifiedMasonryGallery {
         row.className = 'masonry-row';
 
         const gap = 12; // px
-        const totalAspectRatio = rowImages.reduce((sum, img) => 
-            sum + (img.aspectRatio || 1.5), 0);
-        
-        const totalGapWidth = (rowImages.length - 1) * gap;
-        const availableWidth = this.containerWidth - totalGapWidth;
-        
-        // Calculate optimal row height (constrained)
-        let rowHeight = availableWidth / totalAspectRatio;
-        rowHeight = Math.max(this.minRowHeight, Math.min(rowHeight, this.maxRowHeight));
+        const fixedHeight = this.targetRowHeight; // 使用固定高度
 
         rowImages.forEach((image, index) => {
             const item = document.createElement('div');
             item.className = 'gallery-item';
             
-            const itemWidth = (image.aspectRatio || 1.5) * rowHeight;
+            // 使用固定高度，寬度根據比例計算
+            const aspectRatio = image.aspectRatio || 1.5;
+            const itemWidth = fixedHeight * aspectRatio;
+            
             item.style.width = itemWidth + 'px';
-            item.style.height = rowHeight + 'px';
+            item.style.height = fixedHeight + 'px';
             item.style.flexShrink = '0';
 
             item.innerHTML = '<img src="' + image.src + '" alt="' + image.title + '" loading="lazy">' +
