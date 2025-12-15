@@ -1,4 +1,4 @@
-// Gallery Page Preloader and Transition Handler
+// Gallery Page Preloader and Transition Handler with Image Preloading
 
 class GalleryPreloader {
     constructor() {
@@ -6,10 +6,14 @@ class GalleryPreloader {
         this.overlay = document.getElementById('page-transition-overlay');
         this.progressBar = null;
         this.progressText = null;
+        this.progressLabel = null;
         this.currentProgress = 0;
         this.targetProgress = 0;
         this.minLoadTime = 800; // Minimum preloader display time
         this.startTime = Date.now();
+        this.totalImages = 0;
+        this.loadedImages = 0;
+        this.imagesLoaded = false;
         
         this.init();
     }
@@ -17,6 +21,7 @@ class GalleryPreloader {
     init() {
         this.progressBar = this.preloader?.querySelector('.progress-bar-fill');
         this.progressText = this.preloader?.querySelector('.progress-text');
+        this.progressLabel = this.preloader?.querySelector('.progress-label');
         
         // Start fade-out of page transition overlay
         if (this.overlay) {
@@ -25,8 +30,8 @@ class GalleryPreloader {
             }, 100);
         }
         
-        // Simulate loading progress
-        this.simulateLoading();
+        // Start loading images
+        this.loadGalleryImages();
         
         // Wait for images and minimum time
         if (document.readyState === 'loading') {
@@ -36,23 +41,72 @@ class GalleryPreloader {
         }
     }
     
-    simulateLoading() {
-        const interval = setInterval(() => {
-            if (this.targetProgress < 90) {
-                this.targetProgress += Math.random() * 15;
-                this.targetProgress = Math.min(this.targetProgress, 90);
+    async loadGalleryImages() {
+        try {
+            // Use pictureData from window
+            if (!window.pictureData || !Array.isArray(window.pictureData)) {
+                console.warn('Picture data not available');
+                this.imagesLoaded = true;
+                this.targetProgress = 90;
+                this.updateProgress();
+                return;
             }
-            this.updateProgress();
             
-            if (this.targetProgress >= 90) {
-                clearInterval(interval);
+            const allImages = window.pictureData;
+            this.totalImages = allImages.length;
+            this.loadedImages = 0;
+            
+            if (this.totalImages === 0) {
+                this.imagesLoaded = true;
+                this.targetProgress = 90;
+                this.updateProgress();
+                return;
             }
-        }, 200);
+            
+            // Preload all images
+            const imagePromises = allImages.map((data) => {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    
+                    const onLoadComplete = () => {
+                        this.loadedImages++;
+                        // Progress from 0% to 90% based on loaded images
+                        const progress = (this.loadedImages / this.totalImages) * 90;
+                        this.targetProgress = progress;
+                        this.updateProgress();
+                    };
+                    
+                    img.onload = () => {
+                        onLoadComplete();
+                        resolve();
+                    };
+                    
+                    img.onerror = () => {
+                        console.warn('Failed to load image:', data.src);
+                        onLoadComplete();
+                        resolve();
+                    };
+                    
+                    img.src = data.src;
+                });
+            });
+            
+            // Wait for all images
+            await Promise.all(imagePromises);
+            this.imagesLoaded = true;
+            
+        } catch (error) {
+            console.warn('Failed to preload gallery images:', error);
+            this.imagesLoaded = true;
+            this.targetProgress = 90;
+            this.updateProgress();
+        }
     }
     
     updateProgress() {
         // Smooth progress animation
-        this.currentProgress += (this.targetProgress - this.currentProgress) * 0.1;
+        const diff = this.targetProgress - this.currentProgress;
+        this.currentProgress += diff * 0.15;
         
         if (this.progressBar) {
             this.progressBar.style.width = this.currentProgress + '%';
@@ -62,23 +116,37 @@ class GalleryPreloader {
             this.progressText.textContent = Math.round(this.currentProgress) + '%';
         }
         
-        if (this.currentProgress < this.targetProgress) {
+        if (Math.abs(diff) > 0.5) {
             requestAnimationFrame(() => this.updateProgress());
         }
     }
     
     checkCompletion() {
-        const elapsedTime = Date.now() - this.startTime;
-        const remainingTime = Math.max(0, this.minLoadTime - elapsedTime);
+        const checkInterval = setInterval(() => {
+            if (this.imagesLoaded) {
+                clearInterval(checkInterval);
+                
+                const elapsedTime = Date.now() - this.startTime;
+                const remainingTime = Math.max(0, this.minLoadTime - elapsedTime);
+                
+                setTimeout(() => {
+                    this.targetProgress = 100;
+                    this.updateProgress();
+                    
+                    setTimeout(() => {
+                        this.completeLoading();
+                    }, 400);
+                }, remainingTime);
+            }
+        }, 100);
         
+        // Fallback timeout
         setTimeout(() => {
-            this.targetProgress = 100;
-            this.updateProgress();
-            
-            setTimeout(() => {
+            clearInterval(checkInterval);
+            if (!this.imagesLoaded) {
                 this.completeLoading();
-            }, 300);
-        }, remainingTime);
+            }
+        }, 8000);
     }
     
     completeLoading() {
