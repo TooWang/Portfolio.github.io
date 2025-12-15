@@ -161,12 +161,32 @@ class JustifiedMasonryGallery {
             item.style.width = itemWidth + 'px';
             item.style.height = fixedHeight + 'px';
             item.style.flexShrink = '0';
+            
+            // 設置初始狀態：透明且向上移動
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(-20px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 
-            item.innerHTML = '<img src="' + image.src + '" alt="' + image.title + '" loading="lazy">' +
+            item.innerHTML = '<img src="' + image.src + '" alt="' + image.title + '" loading="lazy" class="gallery-image">' +
                 '<div class="gallery-item-overlay">' +
                     '<div class="gallery-item-title">' + image.title + '</div>' +
                     '<div class="gallery-item-subtitle">' + (image.subtitle || '') + '</div>' +
                 '</div>';
+
+            // 為圖片添加淡入動畫
+            const img = item.querySelector('img');
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.5s ease';
+            
+            // 當圖片加載完成時執行淡入動畫
+            img.addEventListener('load', () => {
+                img.style.opacity = '1';
+            });
+            
+            // 處理圖片加載失敗的情況
+            img.addEventListener('error', () => {
+                img.style.opacity = '1';
+            });
 
             item.addEventListener('click', () => {
                 this.openLightbox(this.allImages.indexOf(image));
@@ -192,32 +212,31 @@ class JustifiedMasonryGallery {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
+                    // 觸發淡入動畫
                     entry.target.style.opacity = '1';
-                    // 移除 inline transition 以讓 CSS hover transition 生效
-                    entry.target.style.transition = '';
+                    entry.target.style.transform = 'translateY(0)';
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Observe all gallery items
+        // Observe all gallery items - 設置不同的延遲以實現由上到下的效果
         setTimeout(() => {
+            let itemIndex = 0;
             document.querySelectorAll('.gallery-item').forEach((item) => {
-                item.style.opacity = '0';
-                item.style.transition = 'opacity 0.5s ease';
+                // 設置延遲效果
+                const delay = itemIndex * 30; // 每個卡片延遲 30ms
+                item.style.transitionDelay = delay + 'ms';
                 observer.observe(item);
+                itemIndex++;
             });
         }, 100);
     }
 
     setupLightbox() {
         const closeBtn = this.lightbox.querySelector('.lightbox-close');
-        const prevBtn = this.lightbox.querySelector('.lightbox-prev');
-        const nextBtn = this.lightbox.querySelector('.lightbox-next');
 
         closeBtn.addEventListener('click', () => this.closeLightbox());
-        prevBtn.addEventListener('click', () => this.previousImage());
-        nextBtn.addEventListener('click', () => this.nextImage());
 
         this.lightbox.addEventListener('click', (e) => {
             if (e.target === this.lightbox) {
@@ -227,8 +246,6 @@ class JustifiedMasonryGallery {
 
         document.addEventListener('keydown', (e) => {
             if (!this.lightbox.classList.contains('active')) return;
-            if (e.key === 'ArrowLeft') this.previousImage();
-            if (e.key === 'ArrowRight') this.nextImage();
             if (e.key === 'Escape') this.closeLightbox();
         });
     }
