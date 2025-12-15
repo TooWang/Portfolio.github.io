@@ -26,9 +26,11 @@ class JustifiedMasonryGallery {
         }
 
         this.renderGallery();
-        this.setupScrollAnimation();
         this.setupLightbox();
         this.setupResizeListener();
+
+        // Match homepage gallery entrance: simple hover-only cards
+        this.disableScrollAnimation();
     }
 
     async fetchPictureData() {
@@ -161,32 +163,12 @@ class JustifiedMasonryGallery {
             item.style.width = itemWidth + 'px';
             item.style.height = fixedHeight + 'px';
             item.style.flexShrink = '0';
-            
-            // 設置初始狀態：透明且向上移動
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(-20px)';
-            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 
             item.innerHTML = '<img src="' + image.src + '" alt="' + image.title + '" loading="lazy" class="gallery-image">' +
                 '<div class="gallery-item-overlay">' +
                     '<div class="gallery-item-title">' + image.title + '</div>' +
                     '<div class="gallery-item-subtitle">' + (image.subtitle || '') + '</div>' +
                 '</div>';
-
-            // 為圖片添加淡入動畫
-            const img = item.querySelector('img');
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 0.5s ease';
-            
-            // 當圖片加載完成時執行淡入動畫
-            img.addEventListener('load', () => {
-                img.style.opacity = '1';
-            });
-            
-            // 處理圖片加載失敗的情況
-            img.addEventListener('error', () => {
-                img.style.opacity = '1';
-            });
 
             item.addEventListener('click', () => {
                 this.openLightbox(this.allImages.indexOf(image));
@@ -203,35 +185,8 @@ class JustifiedMasonryGallery {
         }
     }
 
-    setupScrollAnimation() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '50px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // 觸發淡入動畫
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe all gallery items - 設置不同的延遲以實現由上到下的效果
-        setTimeout(() => {
-            let itemIndex = 0;
-            document.querySelectorAll('.gallery-item').forEach((item) => {
-                // 設置延遲效果
-                const delay = itemIndex * 30; // 每個卡片延遲 30ms
-                item.style.transitionDelay = delay + 'ms';
-                observer.observe(item);
-                itemIndex++;
-            });
-        }, 100);
-    }
+    // Disable scroll-triggered animations for parity with homepage gallery
+    disableScrollAnimation() {}
 
     setupLightbox() {
         const closeBtn = this.lightbox.querySelector('.lightbox-close');
