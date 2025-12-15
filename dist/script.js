@@ -1,6 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     /* ============================================
+       UTILITY - Page Transition for Navigator
+       ============================================ */
+    
+    const setupPageTransition = () => {
+        const navigators = document.querySelectorAll('.gallery-navigator');
+        const overlay = document.getElementById('page-transition-overlay');
+        
+        if (!overlay) return;
+        
+        navigators.forEach((nav) => {
+            nav.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetUrl = nav.getAttribute('href');
+                
+                // Trigger transition overlay
+                overlay.classList.add('active');
+                
+                // Navigate after animation completes
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 500);
+            });
+        });
+    };
+    
+    setupPageTransition();
+
+    /* ============================================
        UTILITY - Gallery Navigator Visibility on Scroll
        ============================================ */
     

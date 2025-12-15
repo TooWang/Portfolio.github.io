@@ -7,8 +7,23 @@
     <link rel="icon" href="../icon.ico">
     <link rel="stylesheet" href="cover.css">
     <link rel="stylesheet" href="gallery.css">
+    <link rel="stylesheet" href="preloader.css">
 </head>
 <body>
+    <!-- Page Transition Overlay -->
+    <div id="page-transition-overlay" class="page-transition-overlay"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill"></div>
+            </div>
+            <div class="progress-text">0%</div>
+            <div class="progress-label">Loading</div>
+        </div>
+    </div>
+
     <section class="gallery-cover">
         <div class="gallery-cover-content">
             <h1 class="gallery-cover-title">相冊</h1>
@@ -33,6 +48,7 @@
     </section>
 
     <script src="../picture-data.js"></script>
+    <script src="preloader.js"></script>
     <script src="cover.js"></script>
     <script src="gallery.js"></script>
 </body>
