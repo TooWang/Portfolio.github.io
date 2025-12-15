@@ -86,11 +86,24 @@ class JustifiedMasonryGallery {
         sectionDiv.className = 'gallery-section';
         sectionDiv.setAttribute('data-section', sectionName);
         
+        // Resolve metadata for section title/subtitle
+        const meta = (window.sectionMetadata && window.sectionMetadata[sectionName]) || null;
+        const resolvedTitle = meta?.title || (sectionName.charAt(0).toUpperCase() + sectionName.slice(1));
+        const resolvedSubtitle = meta?.subtitle || '';
+
         // Create section title
         const sectionTitle = document.createElement('h2');
         sectionTitle.className = 'section-title';
-        sectionTitle.textContent = sectionName.charAt(0).toUpperCase() + sectionName.slice(1);
+        sectionTitle.textContent = resolvedTitle;
         sectionDiv.appendChild(sectionTitle);
+
+        // Optional subtitle
+        if (resolvedSubtitle) {
+            const sectionSubtitle = document.createElement('p');
+            sectionSubtitle.className = 'section-subtitle';
+            sectionSubtitle.textContent = resolvedSubtitle;
+            sectionDiv.appendChild(sectionSubtitle);
+        }
         
         // Create section grid
         const sectionGrid = document.createElement('div');

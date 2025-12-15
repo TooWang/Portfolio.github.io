@@ -403,7 +403,7 @@ window.pictureData = [
     "title": "自由設計",
     "subtitle": "我操！脫機",
     "src": "https://www.toowang.space/Design/Design_Offline.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1.78,
     "featured": true
   },
   {
@@ -412,7 +412,7 @@ window.pictureData = [
     "title": "自由設計",
     "subtitle": "萊茵生命",
     "src": "https://www.toowang.space/Design/Design_Rhine.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1.78,
     "featured": true
   },
   {
@@ -421,7 +421,7 @@ window.pictureData = [
     "title": "自由練習",
     "subtitle": "Mon3tr",
     "src": "https://www.toowang.space/Design/Design_Mon3tr.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1.78,
     "featured": true
   },
   {
@@ -430,7 +430,7 @@ window.pictureData = [
     "title": "自由練習",
     "subtitle": "給隆城呼籲配圖\"火車甩在身後\"",
     "src": "https://www.toowang.space/Design/Other_PepeBigAss.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1.78,
     "featured": true
   },
 
