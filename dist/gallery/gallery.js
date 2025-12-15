@@ -10,6 +10,7 @@ class JustifiedMasonryGallery {
         this.targetRowHeight = 280;
         this.minRowHeight = 180;
         this.maxRowHeight = 400;
+        this.scrollObserver = null;
         
         this.grid = document.getElementById('masonryGrid');
         this.lightbox = document.getElementById('lightbox');
@@ -28,9 +29,6 @@ class JustifiedMasonryGallery {
         this.renderGallery();
         this.setupLightbox();
         this.setupResizeListener();
-
-        // Match homepage gallery entrance: simple hover-only cards
-        this.disableScrollAnimation();
     }
 
     async fetchPictureData() {
@@ -64,6 +62,8 @@ class JustifiedMasonryGallery {
         Object.keys(sections).forEach((sectionName) => {
             this.renderSection(sectionName, sections[sectionName]);
         });
+
+        this.setupScrollAnimation();
     }
 
     groupImagesBySection() {
@@ -185,8 +185,36 @@ class JustifiedMasonryGallery {
         }
     }
 
-    // Disable scroll-triggered animations for parity with homepage gallery
-    disableScrollAnimation() {}
+    setupScrollAnimation() {
+        if (!this.grid) return;
+
+        // Disconnect previous observer to avoid duplicate callbacks
+        if (this.scrollObserver) {
+            this.scrollObserver.disconnect();
+        }
+
+        const options = {
+            threshold: 0.2,
+            rootMargin: '40px 0px'
+        };
+
+        this.scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    this.scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        const items = this.grid.querySelectorAll('.gallery-item');
+        items.forEach((item, index) => {
+            item.classList.remove('is-visible');
+            const delay = Math.min(index * 50, 600); // stagger top-to-bottom
+            item.style.transitionDelay = `${delay}ms`;
+            this.scrollObserver.observe(item);
+        });
+    }
 
     setupLightbox() {
         const closeBtn = this.lightbox.querySelector('.lightbox-close');
