@@ -446,7 +446,7 @@ window.pictureData = [
     "title": "灰喉",
     "subtitle": "",
     "src": "https://www.toowang.space/Artwork/GreyThroat1.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 0.75,
     "objectPosition": "50% 10%",
     "featured": true
   },
@@ -456,7 +456,7 @@ window.pictureData = [
     "title": "灰喉",
     "subtitle": "",
     "src": "https://www.toowang.space/Artwork/GreyThroat2.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1,
     "objectPosition": "50% 10%",
     "featured": true
   },
@@ -466,7 +466,7 @@ window.pictureData = [
     "title": "灰喉",
     "subtitle": "",
     "src": "https://www.toowang.space/Artwork/GreyThroat3.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1,
     "objectPosition": "50% 20%",
     "featured": true
   },
@@ -476,8 +476,18 @@ window.pictureData = [
     "title": "灰喉",
     "subtitle": "",
     "src": "https://www.toowang.space/Artwork/GreyThroat4.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1,
     "objectPosition": "50% 10%",
+    "featured": true
+  },
+  {
+    "id": "Greythroat5",
+    "section": "artwork",
+    "title": "灰喉",
+    "subtitle": "",
+    "src": "https://www.toowang.space/Artwork/GreyThroat5.webp",
+    "aspectRatio": 2.25,
+    "objectPosition": "50% 0%",
     "featured": true
   },
   {
@@ -486,7 +496,7 @@ window.pictureData = [
     "title": "萊伊",
     "subtitle": "",
     "src": "https://www.toowang.space/Artwork/Ray1.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1,
     "featured": true
   },
   {
@@ -495,7 +505,7 @@ window.pictureData = [
     "title": "守林人",
     "subtitle": "",
     "src": "https://www.toowang.space/Artwork/Firewatch1.webp",
-    "aspectRatio": 1.33,
+    "aspectRatio": 1,
     "featured": true
   }
 ];
