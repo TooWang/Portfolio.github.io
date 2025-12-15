@@ -1,24 +1,4 @@
-/* Preloader for Gallery Page */
-
-/* Page Transition Overlay */
-.page-transition-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #333;
-    z-index: 100000;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-    pointer-events: none;
-}
-
-.page-transition-overlay.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
+/* preloader.css */
 
 /* Preloader Base Styles */
 #preloader {
@@ -61,7 +41,7 @@
     overflow: hidden;
     margin-bottom: 2rem;
     position: fixed;
-    top: 48.5vh;
+    top: 49.5vh;
     left: 0;
     z-index: 15;
 }
@@ -140,4 +120,3 @@ body.loading {
         transform: scaleY(0);
     }
 }
-

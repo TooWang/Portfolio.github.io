@@ -47,8 +47,7 @@
 /* Background wrapper under cover for gallery area */
 .gallery-section-wrapper {
     width: 100%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.96)),
-        url('https://www.toowang.space/Section_BG.webp') center/cover no-repeat;
+    background: transparent;
     padding: 3rem 1.5rem 4rem;
 }
 
