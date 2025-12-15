@@ -1,5 +1,18 @@
+// Index
+window.sectionMetadata = {
+  "design": {
+    "title": "平面設計作品",
+    "subtitle": "Design Works",
+    //"description": "想做甚麼就坐甚麼"
+  },
+  "artwork": {
+    "title": "插畫作品",
+    "subtitle": "Artworks",
+    //"description": "甚麼時候教我構圖構成色彩氛圍塑造明暗"
+  }
+};
+
 window.pictureData = [
-  
   ///////////////////////////////////
   //                               //
   //         Design Section        //
@@ -486,3 +499,4 @@ window.pictureData = [
     "featured": true
   }
 ];
+
