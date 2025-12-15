@@ -55,24 +55,65 @@ class JustifiedMasonryGallery {
             return;
         }
 
-        // Group images into rows
-        const rows = this.createRows();
+        // Group images by section
+        const sections = this.groupImagesBySection();
 
-        // Render each row
-        rows.forEach((rowImages) => {
-            this.renderRow(rowImages);
+        // Render each section
+        Object.keys(sections).forEach((sectionName) => {
+            this.renderSection(sectionName, sections[sectionName]);
         });
     }
 
-    createRows() {
+    groupImagesBySection() {
+        const sections = {};
+        
+        this.allImages.forEach((image) => {
+            const section = image.section || 'other';
+            if (!sections[section]) {
+                sections[section] = [];
+            }
+            sections[section].push(image);
+        });
+        
+        return sections;
+    }
+
+    renderSection(sectionName, sectionImages) {
+        // Create section container
+        const sectionDiv = document.createElement('section');
+        sectionDiv.className = 'gallery-section';
+        sectionDiv.setAttribute('data-section', sectionName);
+        
+        // Create section title
+        const sectionTitle = document.createElement('h2');
+        sectionTitle.className = 'section-title';
+        sectionTitle.textContent = sectionName.charAt(0).toUpperCase() + sectionName.slice(1);
+        sectionDiv.appendChild(sectionTitle);
+        
+        // Create section grid
+        const sectionGrid = document.createElement('div');
+        sectionGrid.className = 'section-grid';
+        
+        // Group images into rows for this section
+        const rows = this.createRowsForSection(sectionImages);
+        
+        rows.forEach((rowImages) => {
+            this.renderRow(rowImages, sectionGrid);
+        });
+        
+        sectionDiv.appendChild(sectionGrid);
+        this.grid.appendChild(sectionDiv);
+    }
+
+    createRowsForSection(sectionImages) {
         const rows = [];
         let currentRow = [];
         let currentRowWidth = 0;
         const gap = 12; // px
         const fixedHeight = this.targetRowHeight; // 使用固定高度
 
-        for (let i = 0; i < this.allImages.length; i++) {
-            const image = this.allImages[i];
+        for (let i = 0; i < sectionImages.length; i++) {
+            const image = sectionImages[i];
             const aspectRatio = image.aspectRatio || 1.5;
             
             // 計算這張圖片在固定高度下的寬度
@@ -102,7 +143,7 @@ class JustifiedMasonryGallery {
         return rows;
     }
 
-    renderRow(rowImages) {
+    renderRow(rowImages, container) {
         const row = document.createElement('div');
         row.className = 'masonry-row';
 
@@ -134,7 +175,12 @@ class JustifiedMasonryGallery {
             row.appendChild(item);
         });
 
-        this.grid.appendChild(row);
+        // If container is provided, append to it; otherwise append to grid
+        if (container) {
+            container.appendChild(row);
+        } else {
+            this.grid.appendChild(row);
+        }
     }
 
     setupScrollAnimation() {
@@ -147,6 +193,8 @@ class JustifiedMasonryGallery {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
+                    // 移除 inline transition 以讓 CSS hover transition 生效
+                    entry.target.style.transition = '';
                     observer.unobserve(entry.target);
                 }
             });
