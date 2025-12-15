@@ -167,6 +167,44 @@
     }
 }
 
+/* Gallery Navigator Button */
+.gallery-navigator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 0.875rem 1.5rem;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+}
+
+.gallery-navigator:hover {
+    background: #1a1a1a;
+    transform: translateY(8px);
+}
+
+.gallery-navigator.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.gallery-navigator svg {
+    transition: transform 0.2s ease;
+}
+
+.gallery-navigator:hover svg {
+    transform: translateX(4px);
+}
+
 /* Gallery Responsive Design - Mobile */
 @media (max-width: 768px) {
     .gallery-section .container {
