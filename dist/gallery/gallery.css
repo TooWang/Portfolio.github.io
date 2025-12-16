@@ -175,10 +175,6 @@ header p {
     }
 }
 
-.gallery-item:hover img {
-    /* No transform on hover - only the card moves up */
-}
-
 .gallery-item-overlay {
     position: absolute;
     bottom: 0;
@@ -373,6 +369,10 @@ header p {
 @media (max-width: 768px) {
     body {
         padding: 2rem 1rem;
+    }
+
+    .gallery-container {
+        max-width: 90vh;
     }
 
     header h1 {

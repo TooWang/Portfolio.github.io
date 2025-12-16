@@ -7,6 +7,7 @@ class JustifiedMasonryGallery {
         this.allImages = [];
         this.currentIndex = 0;
         this.containerWidth = 0;
+        // Default desktop row sizing
         this.targetRowHeight = 280;
         this.minRowHeight = 180;
         this.maxRowHeight = 400;
@@ -26,9 +27,32 @@ class JustifiedMasonryGallery {
             await this.fetchPictureData();
         }
 
+        // Set initial row heights based on viewport
+        this.updateRowHeightsForViewport();
+
         this.renderGallery();
         this.setupLightbox();
         this.setupResizeListener();
+    }
+
+    updateRowHeightsForViewport() {
+        const w = window.innerWidth;
+        if (w <= 480) {
+            // Small phones: shorter rows
+            this.targetRowHeight = 90;
+            this.minRowHeight = 60;
+            this.maxRowHeight = 220;
+        } else if (w <= 768) {
+            // Tablets / medium phones
+            this.targetRowHeight = 140;
+            this.minRowHeight = 100;
+            this.maxRowHeight = 300;
+        } else {
+            // Desktop defaults
+            this.targetRowHeight = 280;
+            this.minRowHeight = 180;
+            this.maxRowHeight = 400;
+        }
     }
 
     async fetchPictureData() {
@@ -265,6 +289,8 @@ class JustifiedMasonryGallery {
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
+                // Update sizing based on new viewport
+                this.updateRowHeightsForViewport();
                 this.renderGallery();
                 
                 // 如果 lightbox 打開，也調整圖片大小
