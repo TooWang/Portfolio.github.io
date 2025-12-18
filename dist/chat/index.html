@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI 聊天測試</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 720px;
+      margin: 40px auto;
+    }
+    #chat {
+      border: 1px solid #ccc;
+      padding: 16px;
+      height: 400px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      white-space: pre-wrap;
+    }
+    #input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 8px;
+      padding: 8px 16px;
+    }
+    .user {
+      font-weight: bold;
+      margin-top: 12px;
+    }
+    .ai {
+      margin-left: 12px;
+      color: #333;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<h1>網站 AI 客服（測試）</h1>
+
+<div id="chat"></div>
+
+<textarea id="input" rows="3" placeholder="請輸入問題（最多 1000 字）"></textarea>
+<br />
+<button onclick="sendMessage()">送出</button>
+
+<script>
+async function sendMessage() {
+  const inputEl = document.getElementById("input");
+  const chatEl = document.getElementById("chat");
+  const message = inputEl.value.trim();
+
+  if (!message) return;
+
+  inputEl.value = "";
+  appendMessage("你", message, "user");
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      appendMessage("系統", data.error || "發生錯誤", "error");
+      return;
+    }
+
+    appendMessage("AI", data.reply, "ai");
+
+  } catch (err) {
+    appendMessage("系統", "連線失敗，請稍後再試", "error");
+  }
+}
+
+function appendMessage(sender, text, className) {
+  const chatEl = document.getElementById("chat");
+  const div = document.createElement("div");
+  div.className = className;
+  div.textContent = `${sender}：${text}`;
+  chatEl.appendChild(div);
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
+</script>
+
+</body>
+</html>
