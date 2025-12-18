@@ -46,7 +46,7 @@ export async function onRequestPost(context) {
             {
               role: "system",
               content:
-                "你是此網站的客服助理，只回答與網站本身相關的問題，回答務必簡潔清楚。"
+                "用專業的角度來分析，並給出完整的解答與建議。"
             },
             {
               role: "user",
