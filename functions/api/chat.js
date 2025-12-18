@@ -1,3 +1,4 @@
+console.log("OPENAI_API_KEY:", env.OPENAI_API_KEY);
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -31,7 +32,7 @@ export async function onRequestPost(context) {
     }
 
     // 4. 呼叫 OpenAI
-    const openaiResponse = await fetch(
+        const openaiResponse = await fetch(
       "https://api.openai.com/v1/chat/completions",
       {
         method: "POST",
@@ -41,22 +42,16 @@ export async function onRequestPost(context) {
         },
         body: JSON.stringify({
           model: "gpt-4.1-mini",
-          temperature: 0.3,
-          max_tokens: 300,
           messages: [
-            {
-              role: "system",
-              content:
-                "用專業的角度來分析，並給出完整的解答與建議。"
-            },
-            {
-              role: "user",
-              content: message
-            }
-          ]
+            { role: "system", content: "你是網站客服助理" },
+            { role: "user", content: message }
+          ],
+          max_tokens: 300,
+          temperature: 0.3
         })
       }
     );
+
 
     if (!openaiResponse.ok) {
       const errorText = await openaiResponse.text();
