@@ -1,3 +1,4 @@
+const apiKey = env.OPENAI_API_KEY;
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -35,7 +36,7 @@ export async function onRequestPost(context) {
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
+          "Authorization": `Bearer ${env.apikey}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
