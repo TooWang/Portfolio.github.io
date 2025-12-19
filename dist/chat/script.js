@@ -6,10 +6,31 @@ const toggleThemeBtn = document.getElementById("toggleTheme");
 const attachBtn = document.getElementById("attach");
 const fileInput = document.getElementById("fileInput");
 const filePreviewEl = document.getElementById("filePreview");
+const tokenStatsEl = document.getElementById("tokenStats");
+const totalTokensEl = document.getElementById("totalTokens");
+const estimatedCostEl = document.getElementById("estimatedCost");
 
 let memory = JSON.parse(localStorage.getItem("chat_memory") || "[]");
 let currentFileContext = null; // 存放檔案/圖片摘要文字
 let attachedFile = null; // 延後至送出時一併發送
+
+/* ---------- Token Stats ---------- */
+async function loadTokenStats() {
+  try {
+    const response = await fetch("/api/stats");
+    if (!response.ok) throw new Error("Failed to fetch stats");
+    
+    const stats = await response.json();
+    totalTokensEl.textContent = stats.total_tokens.toLocaleString();
+    estimatedCostEl.textContent = `$${stats.estimated_cost_usd.toFixed(4)}`;
+    
+    if (stats.total_tokens > 0) {
+      tokenStatsEl.hidden = false;
+    }
+  } catch (error) {
+    console.error("Failed to load token stats:", error);
+  }
+}
 
 function clearAttachment() {
   attachedFile = null;
@@ -218,6 +239,7 @@ newChatBtn.onclick = () => {
   currentFileContext = null;
   saveMemory();
   messagesEl.innerHTML = "";
+  loadTokenStats();
 };
 
 toggleThemeBtn.onclick = () => {
@@ -232,3 +254,4 @@ const savedTheme = localStorage.getItem("theme");
 if (savedTheme) document.documentElement.dataset.theme = savedTheme;
 renderMemory();
 autoResize();
+loadTokenStats();

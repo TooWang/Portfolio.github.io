@@ -11,6 +11,16 @@
     <aside class="sidebar">
       <div class="brand">AI 助理</div>
       <button id="newChat" class="btn">＋ 新對話</button>
+      <div id="tokenStats" class="token-stats" hidden>
+        <div class="stat-item">
+          <span class="stat-label">總 Tokens：</span>
+          <span id="totalTokens" class="stat-value">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">預估成本：</span>
+          <span id="estimatedCost" class="stat-value">$0</span>
+        </div>
+      </div>
       <div class="hint">Cloudflare Pages</div>
     </aside>
 

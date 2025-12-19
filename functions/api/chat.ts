@@ -4,9 +4,28 @@ import {
   callOpenAI,
   OpenAIMessage
 } from "../_lib/openai";
+import { insertUsage } from "../_db/usage";
+
+// D1Database 類型
+interface D1Database {
+  prepare(query: string): D1PreparedStatement;
+}
+
+interface D1PreparedStatement {
+  bind(...values: unknown[]): D1PreparedStatement;
+  run(): Promise<D1Result>;
+  all<T = unknown>(): Promise<D1Result<T>>;
+}
+
+interface D1Result<T = unknown> {
+  results?: T[];
+  success: boolean;
+  meta?: Record<string, unknown>;
+}
 
 export interface Env {
   OPENAI_API_KEY: string;
+  DB?: D1Database;
 }
 
 interface HistoryMessage {
@@ -134,6 +153,22 @@ export async function onRequestPost(
     });
 
     console.log("[chat] usage", { ip, ...usage });
+
+    // 保存 token 使用統計到數據庫（如果已配置）
+    if (env.DB) {
+      try {
+        const conversationId = `conv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        await insertUsage(
+          env.DB,
+          conversationId,
+          usage.input_tokens,
+          usage.output_tokens,
+          usage.total_tokens
+        );
+      } catch (dbErr) {
+        console.warn("[chat] failed to save usage stats", dbErr);
+      }
+    }
 
     return new Response(
       JSON.stringify({
