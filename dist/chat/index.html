@@ -9,9 +9,10 @@
 <body>
   <div class="app">
     <aside class="sidebar">
-      <div class="brand">測試</div>
+      <div class="brand">AI 助理</div>
       <button id="newChat" class="btn">＋ 新對話</button>
       <button id="toggleTheme" class="btn">切換深 / 淺色</button>
+      <div class="hint">Cloudflare Pages</div>
     </aside>
 
     <main class="chat">
@@ -22,13 +23,11 @@
       <footer class="composer">
         <input type="file" id="fileInput" hidden />
         <button id="attach" title="上傳圖片或檔案">📎</button>
-
         <textarea
           id="input"
           rows="1"
           placeholder="輸入訊息（Enter 送出，Shift+Enter 換行）"
         ></textarea>
-
         <button id="send">送出</button>
       </footer>
     </main>

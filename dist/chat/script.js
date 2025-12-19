@@ -7,7 +7,7 @@ const attachBtn = document.getElementById("attach");
 const fileInput = document.getElementById("fileInput");
 
 let memory = JSON.parse(localStorage.getItem("chat_memory") || "[]");
-let attachedFile = null;
+let currentFileContext = null; // 存放檔案/圖片摘要文字
 
 /* ---------- Memory ---------- */
 function saveMemory() {
@@ -52,39 +52,47 @@ function removeLoading() {
 }
 
 /* ---------- File ---------- */
-if (attachBtn) {
-  attachBtn.onclick = () => {
-    fileInput.click();
-  };
-}
+attachBtn.onclick = () => fileInput.click();
 
-if (fileInput) {
-  fileInput.addEventListener("change", async () => {
-    const file = fileInput.files[0];
-    if (!file) return;
+fileInput.onchange = async () => {
+  const file = fileInput.files[0];
+  if (!file) return;
 
-    if (file.size > 2 * 1024 * 1024) {
-      alert("檔案請小於 2MB");
-      fileInput.value = "";
-      return;
+  if (file.size > 2 * 1024 * 1024) {
+    alert("檔案請小於 2MB");
+    return;
+  }
+
+  const base64 = await toBase64(file);
+  addMessage("user", `已附加檔案：${file.name}`, false);
+
+  // 先送去後端生成初步摘要/描述
+  addLoading();
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: "",
+        file: { name: file.name, type: file.type, data: base64 }
+      })
+    });
+
+    const data = await res.json();
+    removeLoading();
+
+    if (data.reply) {
+      currentFileContext = data.reply; // 保存摘要 / 描述
+      addMessage("ai", `檔案分析完成，可針對此檔案提問。`, false);
+      addMessage("ai", currentFileContext, false);
+    } else {
+      addMessage("ai", "檔案分析失敗", false);
     }
-
-    try {
-      const base64 = await toBase64(file);
-      attachedFile = {
-        name: file.name,
-        type: file.type,
-        data: base64
-      };
-
-      addMessage("user", `已附加檔案：${file.name}`, false);
-    } catch (error) {
-      console.error("檔案讀取失敗:", error);
-      alert("檔案讀取失敗，請重試");
-      fileInput.value = "";
-    }
-  });
-}
+  } catch {
+    removeLoading();
+    addMessage("ai", "檔案分析連線失敗", false);
+  }
+};
 
 function toBase64(file) {
   return new Promise((resolve, reject) => {
@@ -98,12 +106,13 @@ function toBase64(file) {
 /* ---------- Chat ---------- */
 async function sendMessage() {
   const text = inputEl.value.trim();
-  if (!text && !attachedFile) return;
+  if (!text && !currentFileContext) return;
 
   inputEl.value = "";
   sendBtn.disabled = true;
 
-  addMessage("user", text || "[已送出檔案]");
+  addMessage("user", text || "[提問檔案]");
+
   addLoading();
 
   try {
@@ -112,19 +121,18 @@ async function sendMessage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: text,
-        file: attachedFile
+        context: currentFileContext || null
       })
     });
 
     const data = await res.json();
     removeLoading();
-    addMessage("ai", data.reply || data.error);
+
+    addMessage("ai", data.reply || "發生錯誤");
   } catch {
     removeLoading();
     addMessage("ai", "連線失敗，請稍後再試");
   } finally {
-    attachedFile = null;
-    fileInput.value = "";
     sendBtn.disabled = false;
   }
 }
@@ -141,6 +149,7 @@ sendBtn.onclick = sendMessage;
 
 newChatBtn.onclick = () => {
   memory = [];
+  currentFileContext = null;
   saveMemory();
   messagesEl.innerHTML = "";
 };
