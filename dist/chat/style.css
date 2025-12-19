@@ -71,20 +71,25 @@ body {
 
 /* ---------- Chat ---------- */
 .chat {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 .chat-header {
   padding: 14px 18px;
   background: var(--panel);
   border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .messages {
   padding: 24px;
   overflow-y: auto;
+  flex: 1;
 }
 
 .message {
@@ -152,6 +157,9 @@ code {
   padding: 16px;
   background: var(--panel);
   border-top: 1px solid var(--border);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 
 .composer .file-preview {
