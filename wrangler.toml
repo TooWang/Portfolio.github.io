@@ -1,0 +1,7 @@
+name = "ai-chat-pages"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ai_chat_db"
+database_id = "ecde4322-7b47-43fc-ab79-cc0730e10ba6"
