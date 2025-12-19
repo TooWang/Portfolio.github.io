@@ -154,7 +154,8 @@ function toBase64(file) {
 /* ---------- Chat ---------- */
 async function sendMessage() {
   const text = inputEl.value.trim();
-  if (!text && !currentFileContext) return;
+  // 允許僅圖片（或檔案）時也能送出
+  if (!text && !attachedFile && !currentFileContext) return;
 
   inputEl.value = "";
   sendBtn.disabled = true;
@@ -169,7 +170,9 @@ async function sendMessage() {
     };
   }
 
-  addMessage("user", text || "[提問檔案]", true, userImage);
+  // 訊息文字：若只有圖片則使用友善提示
+  const displayText = (!text && userImage) ? "": (text || "[提問檔案]");
+  addMessage("user", displayText, true, userImage);
 
   addLoading();
 
