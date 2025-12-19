@@ -26,7 +26,8 @@ body {
 .app {
   display: grid;
   grid-template-columns: 260px 1fr;
-  height: 100vh;
+  min-height: 100vh;
+  align-items: start;
 }
 
 /* ---------- Sidebar ---------- */
@@ -37,6 +38,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  align-self: start;
 }
 
 .brand {
@@ -67,6 +73,7 @@ body {
 .chat {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
 }
 
 .chat-header {
