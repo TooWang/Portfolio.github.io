@@ -52,26 +52,39 @@ function removeLoading() {
 }
 
 /* ---------- File ---------- */
-attachBtn.onclick = () => fileInput.click();
-
-fileInput.onchange = async () => {
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  if (file.size > 2 * 1024 * 1024) {
-    alert("檔案請小於 2MB");
-    return;
-  }
-
-  const base64 = await toBase64(file);
-  attachedFile = {
-    name: file.name,
-    type: file.type,
-    data: base64
+if (attachBtn) {
+  attachBtn.onclick = () => {
+    fileInput.click();
   };
+}
 
-  addMessage("user", `已附加檔案：${file.name}`, false);
-};
+if (fileInput) {
+  fileInput.addEventListener("change", async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("檔案請小於 2MB");
+      fileInput.value = "";
+      return;
+    }
+
+    try {
+      const base64 = await toBase64(file);
+      attachedFile = {
+        name: file.name,
+        type: file.type,
+        data: base64
+      };
+
+      addMessage("user", `已附加檔案：${file.name}`, false);
+    } catch (error) {
+      console.error("檔案讀取失敗:", error);
+      alert("檔案讀取失敗，請重試");
+      fileInput.value = "";
+    }
+  });
+}
 
 function toBase64(file) {
   return new Promise((resolve, reject) => {
