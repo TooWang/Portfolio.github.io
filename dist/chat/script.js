@@ -9,6 +9,14 @@ const fileInput = document.getElementById("fileInput");
 let memory = JSON.parse(localStorage.getItem("chat_memory") || "[]");
 let currentFileContext = null; // 存放檔案/圖片摘要文字
 
+function prepareHistory(max = 12) {
+  const trimmed = memory.slice(-max);
+  return trimmed.map(m => ({
+    role: m.role === "ai" ? "assistant" : "user",
+    content: m.content
+  }));
+}
+
 /* ---------- Memory ---------- */
 function saveMemory() {
   localStorage.setItem("chat_memory", JSON.stringify(memory));
@@ -64,7 +72,7 @@ fileInput.onchange = async () => {
   }
 
   const base64 = await toBase64(file);
-  addMessage("user", `已附加檔案：${file.name}`, false);
+  addMessage("user", `已附加檔案：${file.name}`);
 
   // 先送去後端生成初步摘要/描述
   addLoading();
@@ -83,10 +91,10 @@ fileInput.onchange = async () => {
 
     if (data.reply) {
       currentFileContext = data.reply; // 保存摘要 / 描述
-      addMessage("ai", `檔案分析完成，可針對此檔案提問。`, false);
-      addMessage("ai", currentFileContext, false);
+      addMessage("ai", `檔案分析完成，可針對此檔案提問。`);
+      addMessage("ai", currentFileContext);
     } else {
-      addMessage("ai", "檔案分析失敗", false);
+      addMessage("ai", "檔案分析失敗");
     }
   } catch {
     removeLoading();
@@ -121,7 +129,8 @@ async function sendMessage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: text,
-        context: currentFileContext || null
+        context: currentFileContext || null,
+        history: prepareHistory(12)
       })
     });
 

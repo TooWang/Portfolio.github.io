@@ -14,6 +14,7 @@ export async function onRequestPost(context) {
     const message = (body.message || "").trim();
     const file = body.file || null;
     const contextText = body.context || null;
+    const history = Array.isArray(body.history) ? body.history : [];
 
     console.log("[chat] input", {
       ip,
@@ -27,29 +28,42 @@ export async function onRequestPost(context) {
       return new Response(JSON.stringify({ error: "Message or file is required" }), { status: 400 });
     }
 
-    const userMessages = [];
+    const historyMessages = history
+      .slice(-20)
+      .map(m => ({
+        role: m.role === "assistant" ? "assistant" : "user",
+        content: typeof m.content === "string" ? m.content : String(m.content)
+      }));
+
+    const chatMessages = [
+      { role: "system", content: "請用該領域前1%的專業水準，簡潔且具體地回答使用者的問題，並提供實用的建議。" },
+      ...historyMessages
+    ];
+
+    if (contextText) {
+      // 將先前的檔案分析內容放入對話脈絡
+      chatMessages.push({ role: "assistant", content: contextText });
+    }
 
     if (file) {
-      if (file.type.startsWith("image/")) {
-        userMessages.push({
+      if (file.type?.startsWith("image/")) {
+        chatMessages.push({
           role: "user",
           content: [
-            { type: "text", text: "請分析並描述這張圖片。" },
+            { type: "text", text: message ? message : "請分析並描述這張圖片。" },
             { type: "image_url", image_url: { url: `data:${file.type};base64,${file.data}` } }
           ]
         });
       } else {
-        userMessages.push({
+        chatMessages.push({
           role: "user",
-          content: `以下是檔案「${file.name}」內容（Base64，截斷）：\n${file.data.slice(0,4000)}`
+          content: message
+            ? `請參考下列檔案內容回答：\n${message}\n\n<file:${file.name}>\n${file.data.slice(0,4000)}`
+            : `以下是檔案「${file.name}」內容（Base64，截斷）：\n${file.data.slice(0,4000)}`
         });
       }
-    }
-
-    if (contextText) {
-      userMessages.push({ role: "user", content: `根據之前的檔案分析，請回答：\n${message}` });
     } else if (message) {
-      userMessages.push({ role: "user", content: message });
+      chatMessages.push({ role: "user", content: message });
     }
 
     const openaiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -62,10 +76,7 @@ export async function onRequestPost(context) {
         model: "gpt-4.1-mini",
         temperature: 0.3,
         max_tokens: 400,
-        messages: [
-          { role: "system", content: "請用該領域前1%的專業水準，簡潔且具體地回答使用者的問題，並提供實用的建議。" },
-          ...userMessages
-        ]
+        messages: chatMessages
       })
     });
 
