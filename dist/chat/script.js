@@ -11,6 +11,15 @@ let memory = JSON.parse(localStorage.getItem("chat_memory") || "[]");
 let currentFileContext = null; // 存放檔案/圖片摘要文字
 let attachedFile = null; // 延後至送出時一併發送
 
+function clearAttachment() {
+  attachedFile = null;
+  if (filePreviewEl) {
+    filePreviewEl.hidden = true;
+    filePreviewEl.innerHTML = "";
+  }
+  fileInput.value = "";
+}
+
 function prepareHistory(max = 12) {
   const trimmed = memory.slice(-max);
   return trimmed.map(m => ({
@@ -90,22 +99,28 @@ fileInput.onchange = async () => {
     if (file.type && file.type.startsWith("image/")) {
       const src = `data:${file.type};base64,${base64}`;
       if (filePreviewEl) {
-        filePreviewEl.innerHTML = `<img src="${src}" alt="${file.name}"><div class="caption">已附加圖片：${file.name}</div>`;
+        filePreviewEl.innerHTML = `
+          <img src="${src}" alt="${file.name}">
+          <button class="remove" type="button" aria-label="移除附件">×</button>
+          <div class="caption">已附加圖片：${file.name}</div>
+        `;
         filePreviewEl.hidden = false;
+        const btn = filePreviewEl.querySelector('.remove');
+        if (btn) btn.onclick = clearAttachment;
       }
     } else if (filePreviewEl) {
-      filePreviewEl.textContent = `已附加檔案：${file.name}`;
+      filePreviewEl.innerHTML = `
+        <div class="caption">已附加檔案：${file.name}</div>
+        <button class="remove" type="button" aria-label="移除附件">×</button>
+      `;
       filePreviewEl.hidden = false;
+      const btn = filePreviewEl.querySelector('.remove');
+      if (btn) btn.onclick = clearAttachment;
     }
   } catch (e) {
     console.error("檔案讀取失敗", e);
     alert("檔案讀取失敗，請重試");
-    fileInput.value = "";
-    attachedFile = null;
-    if (filePreviewEl) {
-      filePreviewEl.hidden = true;
-      filePreviewEl.innerHTML = "";
-    }
+    clearAttachment();
   }
 };
 
@@ -153,12 +168,7 @@ async function sendMessage() {
   } finally {
     sendBtn.disabled = false;
     // reset attachment after send
-    attachedFile = null;
-    if (filePreviewEl) {
-      filePreviewEl.hidden = true;
-      filePreviewEl.innerHTML = "";
-    }
-    fileInput.value = "";
+    clearAttachment();
   }
 }
 

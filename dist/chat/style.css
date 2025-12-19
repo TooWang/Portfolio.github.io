@@ -156,6 +156,26 @@ code {
 
 .composer .file-preview {
   grid-column: 1 / -1;
+  position: relative;
+}
+.composer .file-preview .remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.composer .file-preview .remove:hover {
+  background: var(--panel-2);
 }
 
 .composer .file-preview img {
