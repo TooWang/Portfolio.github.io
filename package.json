@@ -1,0 +1,21 @@
+{
+  "name": "portfolio.github.io",
+  "version": "1.0.0",
+  "description": "<h3>我忘了啦個人網站兼作品集</h3>\r <h3>https://toowang.space/</h3>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TooWang/Portfolio.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/TooWang/Portfolio.github.io/issues"
+  },
+  "homepage": "https://github.com/TooWang/Portfolio.github.io#readme"
+}
