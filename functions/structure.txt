@@ -1,0 +1,42 @@
+
+/
+├─ public/                      # Pages 靜態資源
+│  ├─ index.html
+│  ├─ styles.css
+│  └─ app.js                    # 前端聊天邏輯
+│
+├─ functions/                   # Pages Functions（= Worker）
+│  ├─ api/
+│  │  ├─ chat.ts                # 對話 API（D1）
+│  │  ├─ upload.ts              # 檔案上傳（R2）
+│  │  └─ files.ts               # 取得檔案 / 列表（R2）
+│  │
+│  ├─ _lib/                     # 純邏輯，不直接處理 request
+│  │  ├─ openai.ts              # OpenAI 呼叫封裝
+│  │  ├─ context.ts             # 對話上下文組裝（D1）
+│  │  ├─ tokenizer.ts           # token 控制 / 截斷
+│  │  └─ prompts.ts             # system prompt（KV）
+│  │
+│  ├─ _db/                      # D1 專用層
+│  │  ├─ conversations.ts
+│  │  ├─ messages.ts
+│  │  └─ usage.ts
+│  │
+│  ├─ _kv/                      # KV 存取層
+│  │  ├─ session.ts             # session / rate limit
+│  │  └─ cache.ts               # prompt / summary 快取
+│  │
+│  ├─ _r2/                      # R2 存取層
+│  │  ├─ upload.ts              # putObject
+│  │  ├─ read.ts                # getObject
+│  │  └─ delete.ts
+│  │
+│  └─ _types/
+│     └─ env.d.ts               # Env bindings 型別
+│
+├─ migrations/                  # D1 schema & migration
+│  ├─ 0001_init.sql
+│  └─ 0002_add_usage.sql
+│
+├─ wrangler.toml
+└─ README.md
