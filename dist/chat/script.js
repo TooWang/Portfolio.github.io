@@ -59,6 +59,16 @@ function removeLoading() {
   document.getElementById("loading")?.remove();
 }
 
+/* ---------- Textarea Auto-Resize ---------- */
+function autoResize() {
+  if (!inputEl) return;
+  inputEl.style.height = "auto";
+  const max = 240; // sync with CSS max-height
+  const next = Math.min(inputEl.scrollHeight, max);
+  inputEl.style.height = next + "px";
+  inputEl.style.overflowY = inputEl.scrollHeight > max ? "auto" : "hidden";
+}
+
 /* ---------- File ---------- */
 attachBtn.onclick = () => fileInput.click();
 
@@ -118,6 +128,7 @@ async function sendMessage() {
 
   inputEl.value = "";
   sendBtn.disabled = true;
+  autoResize();
 
   addMessage("user", text || "[提問檔案]");
 
@@ -153,6 +164,7 @@ inputEl.addEventListener("keydown", e => {
     sendMessage();
   }
 });
+inputEl.addEventListener("input", autoResize);
 
 sendBtn.onclick = sendMessage;
 
@@ -174,3 +186,4 @@ toggleThemeBtn.onclick = () => {
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme) document.documentElement.dataset.theme = savedTheme;
 renderMemory();
+autoResize();
