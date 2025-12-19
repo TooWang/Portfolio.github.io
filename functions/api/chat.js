@@ -1,22 +1,35 @@
-console.log("OPENAI_API_KEY:", env.OPENAI_API_KEY);
-
 export async function onRequestPost(context) {
   const { request, env } = context;
 
+  //Get client IP
+  const ip = request.headers.get("cf-connecting-ip") || "unknown";
+
+  console.log("[chat] request start", {
+    ip,
+    time: new Date().toISOString()
+  });
+
   try {
-    // 1. 基本防呆
+    //Check OpenAI API key
     if (!env.OPENAI_API_KEY) {
+      console.error("[chat] missing OPENAI_API_KEY", { ip });
       return new Response(
         JSON.stringify({ error: "Server not configured" }),
         { status: 500 }
       );
     }
 
-    // 2. 解析請求
+    //Analyze request body
     const body = await request.json();
     const message = (body.message || "").trim();
 
-    // 3. 輸入限制（免費方案一定要有）
+    console.log("[chat] input", {
+      ip,
+      length: message.length,
+      preview: message.slice(0, 50)
+    });
+
+    //Basic validation
     if (!message) {
       return new Response(
         JSON.stringify({ error: "Message is required" }),
@@ -24,15 +37,15 @@ export async function onRequestPost(context) {
       );
     }
 
-    if (message.length > 1000) {
+    if (message.length > 500) {
       return new Response(
         JSON.stringify({ error: "Message too long" }),
         { status: 400 }
       );
     }
 
-    // 4. 呼叫 OpenAI
-        const openaiResponse = await fetch(
+    //Call OpenAI API
+    const openaiResponse = await fetch(
       "https://api.openai.com/v1/chat/completions",
       {
         method: "POST",
@@ -42,20 +55,30 @@ export async function onRequestPost(context) {
         },
         body: JSON.stringify({
           model: "gpt-4.1-mini",
-          messages: [
-            { role: "system", content: "你是網站客服助理" },
-            { role: "user", content: message }
-          ],
+          temperature: 0.3,
           max_tokens: 300,
-          temperature: 0.3
+          messages: [
+            {
+              role: "system",
+              content:
+                "請用該領域前1%的專業水準，簡潔且具體地回答使用者的問題，並提供實用的建議。"
+            },
+            {
+              role: "user",
+              content: message
+            }
+          ]
         })
       }
     );
 
-
     if (!openaiResponse.ok) {
       const errorText = await openaiResponse.text();
-      console.error("OpenAI API error:", errorText);
+      console.error("[chat] openai error", {
+        ip,
+        status: openaiResponse.status,
+        errorText
+      });
 
       return new Response(
         JSON.stringify({ error: "AI service error" }),
@@ -66,14 +89,12 @@ export async function onRequestPost(context) {
     const data = await openaiResponse.json();
     const reply = data.choices?.[0]?.message?.content;
 
-    if (!reply) {
-      return new Response(
-        JSON.stringify({ error: "Invalid AI response" }),
-        { status: 500 }
-      );
-    }
+    console.log("[chat] success", {
+      ip,
+      replyLength: reply?.length
+    });
 
-    // 5. 回傳給前端
+    // 6. 回傳結果
     return new Response(
       JSON.stringify({ reply }),
       {
@@ -82,7 +103,10 @@ export async function onRequestPost(context) {
     );
 
   } catch (err) {
-    console.error("Unhandled error:", err);
+    console.error("[chat] unhandled error", {
+      ip,
+      error: err?.message || err
+    });
 
     return new Response(
       JSON.stringify({ error: "Internal server error" }),

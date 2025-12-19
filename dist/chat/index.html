@@ -1,95 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <title>測試</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      max-width: 720px;
-      margin: 40px auto;
-    }
-    #chat {
-      border: 1px solid #ccc;
-      padding: 16px;
-      height: 400px;
-      overflow-y: auto;
-      margin-bottom: 12px;
-      white-space: pre-wrap;
-    }
-    #input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 8px;
-      padding: 8px 16px;
-    }
-    .user {
-      font-weight: bold;
-      margin-top: 12px;
-    }
-    .ai {
-      margin-left: 12px;
-      color: #333;
-    }
-    .error {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-
-<h1>chatGPT中轉</h1>
-
-<div id="chat"></div>
-
-<textarea id="input" rows="3" placeholder="請輸入問題"></textarea>
-<br />
-<button onclick="sendMessage()">送出</button>
-
-<script>
-async function sendMessage() {
-  const inputEl = document.getElementById("input");
-  const chatEl = document.getElementById("chat");
-  const message = inputEl.value.trim();
-
-  if (!message) return;
-
-  inputEl.value = "";
-  appendMessage("你", message, "user");
-
-  try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      appendMessage("系統", data.error || "發生錯誤", "error");
-      return;
-    }
-
-    appendMessage("AI", data.reply, "ai");
-
-  } catch (err) {
-    appendMessage("系統", "連線失敗，請稍後再試", "error");
-  }
-}
-
-function appendMessage(sender, text, className) {
-  const chatEl = document.getElementById("chat");
-  const div = document.createElement("div");
-  div.className = className;
-  div.textContent = `${sender}：${text}`;
-  chatEl.appendChild(div);
-  chatEl.scrollTop = chatEl.scrollHeight;
-}
-</script>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 客服</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">AI 助理</div>
+        <button class="new-chat" id="newChat">＋ 新對話</button>
+        <div class="hint">此為測試版</div>
+      </aside>
+      <main class="chat">
+        <header class="chat-header">OpenAI</header>
+        <section class="messages" id="messages">
+          <div class="message ai">
+            <div class="bubble">您好！</div>
+          </div>
+        </section>
+        <footer class="composer">
+          <textarea id="input" rows="1" placeholder="輸入訊息（Enter 送出，Shift+Enter 換行）"></textarea>
+          <button id="send">送出</button>
+        </footer>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
