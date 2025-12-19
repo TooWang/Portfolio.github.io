@@ -11,29 +11,6 @@ let memory = JSON.parse(localStorage.getItem("chat_memory") || "[]");
 let currentFileContext = null; // 存放檔案/圖片摘要文字
 let attachedFile = null; // 延後至送出時一併發送
 
-function addImagePreview(src, name) {
-  const msg = document.createElement("div");
-  msg.id = "pendingAttachmentPreview";
-  msg.className = "message user";
-
-  const bubble = document.createElement("div");
-  bubble.className = "bubble";
-
-  const img = document.createElement("img");
-  img.src = src;
-  img.alt = name;
-  bubble.appendChild(img);
-
-  const caption = document.createElement("div");
-  caption.className = "caption";
-  caption.textContent = `已附加圖片：${name}`;
-  bubble.appendChild(caption);
-
-  msg.appendChild(bubble);
-  messagesEl.appendChild(msg);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
 function prepareHistory(max = 12) {
   const trimmed = memory.slice(-max);
   return trimmed.map(m => ({
@@ -112,8 +89,10 @@ fileInput.onchange = async () => {
     attachedFile = { name: file.name, type: file.type, data: base64 };
     if (file.type && file.type.startsWith("image/")) {
       const src = `data:${file.type};base64,${base64}`;
-      addImagePreview(src, file.name);
-      if (filePreviewEl) filePreviewEl.hidden = true;
+      if (filePreviewEl) {
+        filePreviewEl.innerHTML = `<img src="${src}" alt="${file.name}"><div class="caption">已附加圖片：${file.name}</div>`;
+        filePreviewEl.hidden = false;
+      }
     } else if (filePreviewEl) {
       filePreviewEl.textContent = `已附加檔案：${file.name}`;
       filePreviewEl.hidden = false;
@@ -123,8 +102,10 @@ fileInput.onchange = async () => {
     alert("檔案讀取失敗，請重試");
     fileInput.value = "";
     attachedFile = null;
-    if (filePreviewEl) filePreviewEl.hidden = true;
-    document.getElementById("pendingAttachmentPreview")?.remove();
+    if (filePreviewEl) {
+      filePreviewEl.hidden = true;
+      filePreviewEl.innerHTML = "";
+    }
   }
 };
 
@@ -145,9 +126,6 @@ async function sendMessage() {
   inputEl.value = "";
   sendBtn.disabled = true;
   autoResize();
-
-  // remove pending image preview bubble before adding final user message
-  document.getElementById("pendingAttachmentPreview")?.remove();
 
   addMessage("user", text || "[提問檔案]");
 
@@ -176,7 +154,10 @@ async function sendMessage() {
     sendBtn.disabled = false;
     // reset attachment after send
     attachedFile = null;
-    if (filePreviewEl) filePreviewEl.hidden = true;
+    if (filePreviewEl) {
+      filePreviewEl.hidden = true;
+      filePreviewEl.innerHTML = "";
+    }
     fileInput.value = "";
   }
 }
