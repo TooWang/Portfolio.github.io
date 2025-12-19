@@ -1,7 +1,7 @@
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  //Get client IP
+  // Get client IP
   const ip = request.headers.get("cf-connecting-ip") || "unknown";
 
   console.log("[chat] request start", {
@@ -10,7 +10,7 @@ export async function onRequestPost(context) {
   });
 
   try {
-    //Check OpenAI API key
+    // Check OpenAI API key
     if (!env.OPENAI_API_KEY) {
       console.error("[chat] missing OPENAI_API_KEY", { ip });
       return new Response(
@@ -19,20 +19,23 @@ export async function onRequestPost(context) {
       );
     }
 
-    //Analyze request body
+    // Parse request body
     const body = await request.json();
     const message = (body.message || "").trim();
+    const file = body.file || null;
 
     console.log("[chat] input", {
       ip,
-      length: message.length,
-      preview: message.slice(0, 50)
+      textLength: message.length,
+      hasFile: !!file,
+      fileName: file?.name,
+      fileType: file?.type
     });
 
-    //Basic validation
-    if (!message) {
+    // Basic validation
+    if (!message && !file) {
       return new Response(
-        JSON.stringify({ error: "Message is required" }),
+        JSON.stringify({ error: "Message or file is required" }),
         { status: 400 }
       );
     }
@@ -44,7 +47,44 @@ export async function onRequestPost(context) {
       );
     }
 
-    //Call OpenAI API
+    // Build user messages
+    const userMessages = [];
+
+    if (message) {
+      userMessages.push({
+        role: "user",
+        content: message
+      });
+    }
+
+    if (file) {
+      // Image handling (Vision)
+      if (file.type && file.type.startsWith("image/")) {
+        userMessages.push({
+          role: "user",
+          content: [
+            { type: "text", text: "請分析並解釋這張圖片的內容。" },
+            {
+              type: "image_url",
+              image_url: {
+                url: `data:${file.type};base64,${file.data}`
+              }
+            }
+          ]
+        });
+      } else {
+        // Other file types (text / pdf etc.)
+        userMessages.push({
+          role: "user",
+          content:
+            `以下是檔案「${file.name}」的內容（Base64，已截斷），` +
+            `請摘要重點並說明用途：\n\n` +
+            file.data.slice(0, 4000)
+        });
+      }
+    }
+
+    // Call OpenAI API
     const openaiResponse = await fetch(
       "https://api.openai.com/v1/chat/completions",
       {
@@ -56,17 +96,14 @@ export async function onRequestPost(context) {
         body: JSON.stringify({
           model: "gpt-4.1-mini",
           temperature: 0.3,
-          max_tokens: 300,
+          max_tokens: 400,
           messages: [
             {
               role: "system",
               content:
                 "請用該領域前1%的專業水準，簡潔且具體地回答使用者的問題，並提供實用的建議。"
             },
-            {
-              role: "user",
-              content: message
-            }
+            ...userMessages
           ]
         })
       }
@@ -94,7 +131,6 @@ export async function onRequestPost(context) {
       replyLength: reply?.length
     });
 
-    // 6. 回傳結果
     return new Response(
       JSON.stringify({ reply }),
       {
