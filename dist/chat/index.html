@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI 客服</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="app">
-      <aside class="sidebar">
-        <div class="brand">AI 助理</div>
-        <button class="new-chat" id="newChat">＋ 新對話</button>
-        <div class="hint">此為測試版</div>
-      </aside>
-      <main class="chat">
-        <header class="chat-header">OpenAI</header>
-        <section class="messages" id="messages">
-          <div class="message ai">
-            <div class="bubble">您好！</div>
-          </div>
-        </section>
-        <footer class="composer">
-          <textarea id="input" rows="1" placeholder="輸入訊息（Enter 送出，Shift+Enter 換行）"></textarea>
-          <button id="send">送出</button>
-        </footer>
-      </main>
-    </div>
-    <script src="script.js"></script>
-  </body>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>測試</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">測試</div>
+      <button id="newChat" class="btn">＋ 新對話</button>
+      <div class="hint">Cloudflare Pages</div>
+    </aside>
+
+    <main class="chat">
+      <header class="chat-header">測試</header>
+
+      <section id="messages" class="messages"></section>
+
+      <footer class="composer">
+        <textarea
+          id="input"
+          rows="1"
+          placeholder="輸入訊息（Enter 送出，Ctrl+Enter 換行）"
+        ></textarea>
+        <button id="send">送出</button>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
