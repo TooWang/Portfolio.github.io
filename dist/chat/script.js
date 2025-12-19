@@ -56,11 +56,11 @@ function saveMemory() {
 
 function renderMemory() {
   messagesEl.innerHTML = "";
-  memory.forEach(m => addMessage(m.role, m.content, false, m.image || null));
+  memory.forEach(m => addMessage(m.role, m.content, false, m.image || null, m.usage || null));
 }
 
 /* ---------- UI ---------- */
-function addMessage(role, text, save = true, image = null) {
+function addMessage(role, text, save = true, image = null, usage = null) {
   const msg = document.createElement("div");
   msg.className = `message ${role}`;
 
@@ -91,7 +91,7 @@ function addMessage(role, text, save = true, image = null) {
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
   if (save) {
-    memory.push({ role, content: text, image });
+    memory.push({ role, content: text, image, usage });
     saveMemory();
   }
 }
@@ -212,7 +212,12 @@ async function sendMessage() {
     const data = await res.json();
     removeLoading();
 
-    addMessage("ai", data.reply || "發生錯誤");
+    addMessage("ai", data.reply || "發生錯誤", true, null, data.usage || null);
+    
+    // 更新 token 統計
+    if (data.usage) {
+      loadTokenStats();
+    }
   } catch {
     removeLoading();
     addMessage("ai", "連線失敗，請稍後再試");
