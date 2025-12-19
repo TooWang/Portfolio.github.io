@@ -37,7 +37,6 @@ export async function callOpenAI(params: {
       body: JSON.stringify({
         model: "gpt-4.1-mini",
         temperature: 0.3,
-        max_tokens: 400,
         messages: params.messages
       })
     }
