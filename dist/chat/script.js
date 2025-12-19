@@ -5,9 +5,11 @@ const newChatBtn = document.getElementById("newChat");
 const toggleThemeBtn = document.getElementById("toggleTheme");
 const attachBtn = document.getElementById("attach");
 const fileInput = document.getElementById("fileInput");
+const filePreviewEl = document.getElementById("filePreview");
 
 let memory = JSON.parse(localStorage.getItem("chat_memory") || "[]");
 let currentFileContext = null; // 存放檔案/圖片摘要文字
+let attachedFile = null; // 延後至送出時一併發送
 
 function prepareHistory(max = 12) {
   const trimmed = memory.slice(-max);
@@ -69,7 +71,7 @@ function autoResize() {
   inputEl.style.overflowY = inputEl.scrollHeight > max ? "auto" : "hidden";
 }
 
-/* ---------- File ---------- */
+/* ---------- File (defer analysis until send) ---------- */
 attachBtn.onclick = () => fileInput.click();
 
 fileInput.onchange = async () => {
@@ -78,37 +80,23 @@ fileInput.onchange = async () => {
 
   if (file.size > 2 * 1024 * 1024) {
     alert("檔案請小於 2MB");
+    fileInput.value = "";
     return;
   }
 
-  const base64 = await toBase64(file);
-  addMessage("user", `已附加檔案：${file.name}`);
-
-  // 先送去後端生成初步摘要/描述
-  addLoading();
   try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: "",
-        file: { name: file.name, type: file.type, data: base64 }
-      })
-    });
-
-    const data = await res.json();
-    removeLoading();
-
-    if (data.reply) {
-      currentFileContext = data.reply; // 保存摘要 / 描述
-      addMessage("ai", `檔案分析完成，可針對此檔案提問。`);
-      addMessage("ai", currentFileContext);
-    } else {
-      addMessage("ai", "檔案分析失敗");
+    const base64 = await toBase64(file);
+    attachedFile = { name: file.name, type: file.type, data: base64 };
+    if (filePreviewEl) {
+      filePreviewEl.textContent = `已附加檔案：${file.name}`;
+      filePreviewEl.hidden = false;
     }
-  } catch {
-    removeLoading();
-    addMessage("ai", "檔案分析連線失敗", false);
+  } catch (e) {
+    console.error("檔案讀取失敗", e);
+    alert("檔案讀取失敗，請重試");
+    fileInput.value = "";
+    attachedFile = null;
+    if (filePreviewEl) filePreviewEl.hidden = true;
   }
 };
 
@@ -141,7 +129,8 @@ async function sendMessage() {
       body: JSON.stringify({
         message: text,
         context: currentFileContext || null,
-        history: prepareHistory(12)
+        history: prepareHistory(12),
+        file: attachedFile
       })
     });
 
@@ -154,6 +143,10 @@ async function sendMessage() {
     addMessage("ai", "連線失敗，請稍後再試");
   } finally {
     sendBtn.disabled = false;
+    // reset attachment after send
+    attachedFile = null;
+    if (filePreviewEl) filePreviewEl.hidden = true;
+    fileInput.value = "";
   }
 }
 

@@ -142,6 +142,10 @@ code {
   border-top: 1px solid var(--border);
 }
 
+.composer .file-preview {
+  grid-column: 1 / -1;
+}
+
 textarea {
   resize: none;
   padding: 10px 12px;
