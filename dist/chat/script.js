@@ -35,24 +35,42 @@ function saveMemory() {
 
 function renderMemory() {
   messagesEl.innerHTML = "";
-  memory.forEach(m => addMessage(m.role, m.content, false));
+  memory.forEach(m => addMessage(m.role, m.content, false, m.image || null));
 }
 
 /* ---------- UI ---------- */
-function addMessage(role, text, save = true) {
+function addMessage(role, text, save = true, image = null) {
   const msg = document.createElement("div");
   msg.className = `message ${role}`;
 
   const bubble = document.createElement("div");
   bubble.className = "bubble";
-  bubble.innerHTML = role === "ai" ? marked.parse(text) : text;
+  
+  // 如果有圖片，先顯示圖片
+  if (image) {
+    const img = document.createElement("img");
+    img.src = image.src;
+    img.alt = image.name || "上傳的圖片";
+    bubble.appendChild(img);
+    
+    // 如果有文字，在圖片下方顯示
+    if (text) {
+      const textDiv = document.createElement("div");
+      textDiv.style.marginTop = "8px";
+      textDiv.innerHTML = role === "ai" ? marked.parse(text) : text;
+      bubble.appendChild(textDiv);
+    }
+  } else {
+    // 沒有圖片時的原有邏輯
+    bubble.innerHTML = role === "ai" ? marked.parse(text) : text;
+  }
 
   msg.appendChild(bubble);
   messagesEl.appendChild(msg);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
   if (save) {
-    memory.push({ role, content: text });
+    memory.push({ role, content: text, image });
     saveMemory();
   }
 }
@@ -142,7 +160,16 @@ async function sendMessage() {
   sendBtn.disabled = true;
   autoResize();
 
-  addMessage("user", text || "[提問檔案]");
+  // 如果有圖片附件，保存圖片信息以便顯示在對話框中
+  let userImage = null;
+  if (attachedFile && attachedFile.type && attachedFile.type.startsWith("image/")) {
+    userImage = {
+      src: `data:${attachedFile.type};base64,${attachedFile.data}`,
+      name: attachedFile.name
+    };
+  }
+
+  addMessage("user", text || "[提問檔案]", true, userImage);
 
   addLoading();
 
